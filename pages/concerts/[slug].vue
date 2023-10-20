@@ -19,6 +19,15 @@ let locale = route.name.endsWith('es') ? 'es' : 'ca'
 
 const { year, month, day, time, fullMonth } = useDateFormatter(data.story.content.data)
 
+useHead({
+  title: data.story.content.artist1 + ' - ' +  data.story.content.sala + ', ' + data.story.content.localitat
+})
+
+useServerSeoMeta({
+  description: data.story.content.artist1 + ' - ' +  data.story.content.sala + ', ' + data.story.content.localitat,
+  ogDescription: 'Concert de ' + data.story.content.artist1 + ' a ' +  data.story.content.sala + ', ' + data.story.content.localitat
+})
+
 onMounted(() => {
   gsap.set('html', {
     "--primary": sergiStore.colors[data.story.content.color],
