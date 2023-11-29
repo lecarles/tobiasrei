@@ -1,0 +1,49 @@
+$col-gap: clamp(.9rem, 2.25vw, 2.75rem);
+$row-gap: clamp(.9rem, 2.25vw, 2.75rem);
+$col-gap-xl: calc($col-gap * 2);
+$row-gap-xl: calc($row-gap * 2);
+
+$sm-breakpoint: 950px;
+$md-breakpoint: 950px;
+$xl-breakpoint: 1600px;
+
+$font-size-sm: clamp(1.1rem, 1.2vw, 1.85rem);
+$font-size-md: clamp(1.25rem, 1.5vw, 2.5rem);
+$font-size-mdlg: clamp(1.75rem, 2vw, 3.5rem);
+$font-size-lg: clamp(2.75rem, 4vw, 12rem);
+$font-size-xl: clamp(2.5rem, 7vw, 14rem);
+$font-size-2xl: clamp(2.9rem, 9.5vw, 14rem);
+
+$line-height-base: 1.15;
+$font-family-sans: "Nohemi", sans-serif;
+$font-family-serif: "Woodland", serif;
+$font-weight: 500;
+
+$padding-x-sm: calc($col-gap * .75);
+$padding-x-md: $col-gap;
+$padding-x-lg: calc($col-gap * 3);
+
+$padding-y-sm: calc($row-gap * .75);
+$padding-y-md: $row-gap;
+$padding-y-lg: calc($row-gap * 3);
+
+$navbar-height: calc($font-size-sm * 1.4 + $padding-x-sm * 2 + $font-size-sm * 0.4);
+$navbar-height-sm: calc($font-size-sm * 1.4 + $padding-x-md * 2 + $font-size-sm * 0.4);
+
+$gray: #ddd;
+$black: #191919;
+$white: #fff;
+
+html {
+  --primary: #dc4931;
+  --background: #ecefe5;
+  --secondary: #2b2b2b;
+  --secondaryfades: #2b2b2b;
+
+  --white: #ecefe5;
+  --black: #2b2b2b;
+  --red: #dc4931;
+  --green: #2c664b;
+  --orange: #ff9d3a;
+  --purple: #474184;
+}
