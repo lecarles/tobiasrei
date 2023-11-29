@@ -1,14 +1,11 @@
 <template>
-  <div class="footer font-size-sm p-md mt-row-2">
-    <footer-logos />
-    <div class="footer-links grid-2 mt-row-2">
+  <div class="footer font-size-sm p-md mt-row">
+    <div class="footer-links mt-row">
       <div class="social-links left">
-        <a target="_blank" href="https://enviu.es">Enviu.es</a>
-        <a target="_blank" href="https://www.instagram.com/enviuassociacio/">Instagram</a>
-        <a target="_blank" href="https://www.facebook.com/people/En-Viu/100063577120821/">Facebook</a>
+        <a target="_blank" href="https://www.instagram.com/imcarl.es/">Instagram</a>
       </div>
       <div class="social-links">
-        <p class="text-right">L'Associació de sales privades de música en directe, En Viu! rep una subvenció de 25.291,48€ de l'Institut Valencià de Cultura per a la realització del Cicle Viu, de la convocatòria d'ajudes al Foment Musical 2023. </p>
+        <a href="mailto:hola@imcarl.es">hola@imcarl.es</a>
       </div>
     </div>
   </div>
@@ -37,7 +34,6 @@
   }
 
   a {
-    text-transform: uppercase;
     display: block;
   }
 }

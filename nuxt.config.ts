@@ -27,8 +27,8 @@ export default defineNuxtConfig({
         name: 'Valencià'
       },
       {
-        code: 'es',
-        name: 'Castellano'
+        code: 'en',
+        name: 'English'
       },
     ],
     defaultLocale: 'ca',    

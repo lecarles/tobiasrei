@@ -23,7 +23,7 @@ p {
 html {
   font-family: $font-family-sans;
   font-weight: $font-weight;
-  color: var(--primary);
+  color: var(--black);
   background: var(--background);
   letter-spacing: -0.01em;
 }
@@ -39,7 +39,7 @@ html {
 
 a {
   text-decoration: none;
-  color: var(--secondary);
+  color: var(--black);
 }
 
 a.button-link {
@@ -68,10 +68,6 @@ a.button-link {
     display: block;
     transform: scale(1);
   }
-}
-
-.font-serif {
-  font-family: $font-family-serif !important;
 }
 
 h1, .font-size-xl {
@@ -129,7 +125,7 @@ h2 {
 
 .button {
   background: var(--primary);
-  color: var(--background);
+  color: var(--black);
   padding: .55em 2.25em .4em;
   -webkit-clip-path: polygon(.3em 0%, calc(100% - .3em) 0%, 100% .3em, 100% calc(100% - .3em), calc(100% - .3em) 100%, .3em 100%, 0% calc(100% - .3em), 0% .3em);
   clip-path: polygon(.3em 0%, calc(100% - .3em) 0%, 100% .3em, 100% calc(100% - .3em), calc(100% - .3em) 100%, .3em 100%, 0% calc(100% - .3em), 0% .3em);

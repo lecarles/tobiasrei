@@ -1,0 +1,84 @@
+<script setup>
+import { onMounted } from 'vue'
+import { useSergiStore } from '~/stores/sergiStore'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import { pageTransition } from '@/helpers/transitionConfig'
+
+const sergiStore = useSergiStore()
+const { slug } = useRoute().params
+const storyblokApi = useStoryblokApi()
+const route = useRoute()
+let locale = route.name.endsWith('en') ? 'en' : 'ca'
+
+const { data } = await storyblokApi.get('cdn/stories/projects/' + slug, {
+  language: route.name.endsWith('en') ? 'en' : 'ca'
+})
+
+const info = ref(null)
+const page = ref(null)
+
+const { year, month, day, time, fullMonth } = useDateFormatter(data.story.content.data)
+
+definePageMeta({
+  pageTransition: pageTransition,
+})
+
+useHead({
+  title: 'imcarl.es – ' + data.story.content.title
+})
+
+useServerSeoMeta({
+  description: data.story.content.title,
+  ogDescription: data.story.content.title
+})
+
+onMounted(() => {
+  /* gsap.registerPlugin(ScrollTrigger)  
+
+  let st = ScrollTrigger.create({
+    trigger: page.value,
+    pin: info.value,
+    start: "top top",
+    end: "bottom bottom",
+  }) */
+})
+</script>
+
+<template>
+  <div class="p-md project-page" ref="page">
+    <div class="project-page-info" ref="info">
+      <h3>{{data.story.content.title}}</h3>
+      <div v-html="renderRichText(data.story.content.description)"></div>
+    </div>
+    <div class="project-page-assets">
+      <div v-for="asset in data.story.content.media" :key="asset.id">
+        <div class="project-item-thumbnail" v-if="asset.filename">
+          <video v-if="asset.filename.endsWith('mp4')" :src="asset.filename" autoplay muted loop playsinline></video>
+          <img v-else :src="asset.filename">
+        </div>    
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.project-page {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  &-assets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $col-gap;
+
+    img, video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+</style>
