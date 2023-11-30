@@ -23,7 +23,7 @@ const props = defineProps({
 .project-item {
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 1em;
 
   &-thumbnail{
     aspect-ratio: 1;

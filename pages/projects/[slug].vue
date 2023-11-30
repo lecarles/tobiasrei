@@ -49,7 +49,7 @@ onMounted(() => {
   <div class="p-md project-page" ref="page">
     <div class="project-page-info" ref="info">
       <h3>{{data.story.content.title}}</h3>
-      <div v-html="renderRichText(data.story.content.description)"></div>
+      <div class="mt-row font-size-sm" v-html="renderRichText(data.story.content.description)"></div>
     </div>
     <div class="project-page-assets">
       <div v-for="asset in data.story.content.media" :key="asset.id">
