@@ -49,7 +49,8 @@ onMounted(() => {
   <div class="p-md project-page" ref="page">
     <div class="project-page-info" ref="info">
       <h3>{{data.story.content.title}}</h3>
-      <div class="mt-row font-size-sm" v-html="renderRichText(data.story.content.description)"></div>
+      <div class="mt-row font-size-sm mb-auto" v-html="renderRichText(data.story.content.description)"></div>
+      <carl-link v-if="data.story.content.link[0].url" to="/">{{data.story.content.link[0].displayName}}</carl-link>
     </div>
     <div class="project-page-assets">
       <div v-for="asset in data.story.content.media" :key="asset.id">
@@ -67,6 +68,13 @@ onMounted(() => {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 2fr;
+  gap: calc($col-gap * 2);
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - $navbar-height - $padding-x-md * 2);
+  }
 
   &-assets {
     display: grid;

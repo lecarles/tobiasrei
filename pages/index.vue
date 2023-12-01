@@ -26,6 +26,7 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
       <div class="intro-text font-size-md">
         {{ data.story.content.introText }}
       </div>
+      <custom-cursor />
     </div>
     <ProjectsSection></ProjectsSection>
   </div>
@@ -33,7 +34,7 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
 
 <style lang="scss">
 .intro-section {
-  height: 100vh;
+  height: calc(80vh - $navbar-height);
   display: flex;
   align-items: center;
   justify-content: center;

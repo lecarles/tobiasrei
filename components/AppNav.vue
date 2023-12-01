@@ -1,8 +1,9 @@
 <template>
   <div class="navbar navbar-wrapper font-size-sm">
-    <carl-button>{{ $t('available') }}</carl-button>
-    <div class="navbar-md" ref="navbar">
-      <NuxtLink class="locale-change button-link" v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">{{
+    <div class="navbar-md w-100" ref="navbar">
+      <NuxtLink to="/" v-if="route.params.slug">imcarl.es</NuxtLink>
+      <carl-button v-else>{{ $t('available') }}</carl-button>
+      <NuxtLink class="locale-change ml-auto" v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">{{
       locale.name
     }}</NuxtLink>
     </div>
@@ -107,7 +108,7 @@ function setupTl() {
 .navbar {
   
   &-wrapper {
-    padding: $padding-x-sm $padding-x-md;
+    padding: $padding-x-md $padding-x-md 0;
     width: 100%;
     display: flex;
     align-items: center;

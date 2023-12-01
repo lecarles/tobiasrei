@@ -1,5 +1,5 @@
-$col-gap: clamp(.9rem, 2.25vw, 2.75rem);
-$row-gap: clamp(.9rem, 2.25vw, 2.75rem);
+$col-gap: clamp(.9rem, 1.75vw, 2.25rem);
+$row-gap: clamp(.9rem, 1.75vw, 2.25rem);
 $col-gap-xl: calc($col-gap * 2);
 $row-gap-xl: calc($row-gap * 2);
 
@@ -26,7 +26,7 @@ $padding-y-sm: calc($row-gap * .75);
 $padding-y-md: $row-gap;
 $padding-y-lg: calc($row-gap * 3);
 
-$navbar-height: calc($font-size-sm * 1.4 + $padding-x-sm * 2 + $font-size-sm * 0.4);
+$navbar-height: calc($font-size-sm * 1.4 + $padding-x-md + $font-size-sm * 0.6);
 $navbar-height-sm: calc($font-size-sm * 1.4 + $padding-x-md * 2 + $font-size-sm * 0.4);
 
 $gray: #ddd;
