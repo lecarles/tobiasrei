@@ -1,8 +1,9 @@
-export default defineI18nConfig(nuxt => ({
+export default defineI18nConfig(() => ({
 legacy: false,
   locale: 'ca',
   messages: {
     ca: {
+      available: 'Disponible a partir de juny (2024)',
       projects: 'Projectes',
       contact: 'Contacte i CV',
       about: 'Sobre mi',
@@ -25,6 +26,7 @@ legacy: false,
       footerb: 'Contacta’m si en vols una!'
     },
     en: {
+      available: 'Available from June 2024',
       projects: 'Projects',
       about: 'About me',
       contact: 'About & CV',

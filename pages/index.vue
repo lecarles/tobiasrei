@@ -22,6 +22,7 @@ const { data } = await storyblokApi.get('cdn/stories/home', {
 
 <template>
   <div class="main-page font-size-sm">
+    <app-nav />
     <div class="intro-section">
       <div class="intro-text font-size-md">
         {{ data.story.content.introText }}

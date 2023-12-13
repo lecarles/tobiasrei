@@ -29,5 +29,9 @@ const { data } = await storyblokApi.get('cdn/stories/', {
     width: 100%;
     background: var(--black);
   }
+
+  &-grid {
+    row-gap: calc($col-gap * 0.5)
+  }
 }
 </style>

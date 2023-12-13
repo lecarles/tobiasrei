@@ -10,10 +10,12 @@ const props = defineProps({
 
 <template>
   <nuxt-link class="project-item" :to="props.project.full_slug">
-    <div class="project-item-thumbnail" v-if="props.project.content.featuredMedia.filename">
-      <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay muted loop playsinline></video>
-      <img v-else :src="props.project.content.featuredMedia.filename">
-    </div>    
+    <clipped-frame>
+      <template v-if="props.project.content.featuredMedia.filename">
+        <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay muted loop playsinline></video>
+        <img v-else :src="props.project.content.featuredMedia.filename">
+      </template>
+    </clipped-frame>    
     <div class="project-item-title">{{props.project.content.title}}</div>
   </nuxt-link>
 </template>
@@ -23,19 +25,13 @@ const props = defineProps({
 .project-item {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: .25em;
 
-  &-thumbnail{
-    aspect-ratio: 1;
+  img, video {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-
-    img, video {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 1;
-    }
+    aspect-ratio: 1;
   }
 }
 </style>

@@ -46,18 +46,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-md project-page" ref="page">
-    <div class="project-page-info" ref="info">
-      <h3>{{data.story.content.title}}</h3>
-      <div class="mt-row font-size-sm mb-auto" v-html="renderRichText(data.story.content.description)"></div>
-      <carl-link v-if="data.story.content.link[0].url" to="/">{{data.story.content.link[0].displayName}}</carl-link>
-    </div>
-    <div class="project-page-assets">
-      <div v-for="asset in data.story.content.media" :key="asset.id">
-        <div class="project-item-thumbnail" v-if="asset.filename">
-          <video v-if="asset.filename.endsWith('mp4')" :src="asset.filename" autoplay muted loop playsinline></video>
-          <img v-else :src="asset.filename">
-        </div>    
+  <div>
+    <app-nav />
+    <div class="p-md project-page" ref="page">
+      <div class="project-page-info" ref="info">
+        <h3>{{data.story.content.title}}</h3>
+        <div class="mt-row font-size-sm mb-auto" v-html="renderRichText(data.story.content.description)"></div>
+        <carl-link v-if="data.story.content.link[0]" to="/">{{data.story.content.link[0].displayName}}</carl-link>
+      </div>
+      <div class="project-page-assets">
+        <work-gallery :items="data.story.content.media" />
+        <div v-for="asset in data.story.content.media" :key="asset.id">
+          <div class="project-item-thumbnail" v-if="asset.filename">
+            <video v-if="asset.filename.endsWith('mp4')" :src="asset.filename" autoplay muted loop playsinline></video>
+            <img v-else :src="asset.filename">
+          </div>    
+        </div>
       </div>
     </div>
   </div>

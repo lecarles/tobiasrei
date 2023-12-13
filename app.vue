@@ -1,7 +1,11 @@
 <template>
   <div>
-      <app-nav />
-      <NuxtPage />
+    <div id="smooth-wrapper" ref="main">
+      <div id="smooth-content">
+        <NuxtPage />
+      </div>
+    </div>
+    <transition-element />
   </div>
 </template>
 
@@ -20,11 +24,18 @@ const main = ref(null)
 const { toggleTransitionComplete } = useTransitionComposable()
 
 onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)  
+
+  ctx = gsap.context(() => {
+    smoother = ScrollSmoother.create({
+      smooth: 1, 
+      effects: true,
+    })
+  }, main.value)
+
   onResize()
   window.addEventListener('resize', onResize)
   toggleTransitionComplete(true)
-
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)  
 })
       
 onUnmounted(() => {
