@@ -1,7 +1,6 @@
 <template>
   <div class="work-gallery">
-    <!-- <work-gallery-slide v-for="(item, i) in props.items" :key="item.id" :item="item" :is-active-slide="activeSlide === i" /> -->
-    {{ props.items }}
+    <work-gallery-slide v-for="(item, i) in props.items" :key="item.id" :item="item" :is-active-slide="activeSlide === i" />
     <div class="work-gallery-nav work-gallery-nav-md">
       <button @click="setActiveSlide(activeSlide - 1)" @mouseover="prevMouseover()" @mouseleave="prevMouseleave()" />
       <button @click="setActiveSlide(activeSlide + 1)" @mouseover="nextMouseover()" @mouseleave="nextMouseleave()" />
@@ -15,13 +14,27 @@
     <div v-if="showTapMe" class="work-gallery-tap-me md-d-none sm-d-block">
       Toca'm!
     </div>
+    <div class="work-gallery-thumbs-nav">
+      <div v-for="(item, i) in props.items" :key="item.id" class="work-gallery-slide">
+        <video v-if="item.filename.endsWith('mp4')" playsinline autoplay muted loop class="video">
+          <source :src="item.filename" type="video/mp4">
+        </video>
+        <img v-else
+          :src="item.filename"
+          :alt="item.title"
+        >
+        <div>
+          {{ i }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 
-let activeSlide = 0
+let activeSlide = ref(0)
 let showTapMe = true
 
 const props = defineProps({
@@ -32,17 +45,19 @@ const props = defineProps({
 })
 
 onMounted (() => {
-  activeSlide = 0
+  activeSlide.value = 0
 })
 
 function setActiveSlide (i) {
   if (i < 0) {
-    activeSlide = items.length - 1
-  } else if (i < items.length) {
-    activeSlide = i
+    activeSlide.value = props.items.length - 1
+  } else if (i < props.items.length) {
+    activeSlide.value = i
   } else {
-    activeSlide = 0
+    activeSlide.value = 0
   }
+
+  console.log('yoo')
 
   showTapMe = false
 }
@@ -67,9 +82,19 @@ function nextMouseleave () {
 <style lang="scss">
 .work-gallery {
   display: flex;
-  width: 100%;
-  height: 100vh;
+  max-height: calc(100vh - $navbar-height - $padding-x-md * 2);
+  max-width: 100%;
   position: relative;
+  aspect-ratio: 1;
+
+  &-thumbs-nav {
+    img, .video {
+      aspect-ratio: 1;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
 
   &-nav {
     width: 100%;
@@ -88,7 +113,7 @@ function nextMouseleave () {
       border: none;
       outline: none;
       background: none;
-      cursor: none;
+      //cursor: none;
     }
 
     &-sm {

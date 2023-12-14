@@ -1,13 +1,12 @@
 <template>
-  <div v-show="props.isActiveSlide" class="work-gallery-slide" :style="props.item.fields.description">
-    <img
-      v-if="props.item.fields.file.contentType.startsWith('image')"
-      :src="props.item.fields.file.url"
-      :alt="props.item.fields.file.title"
-    >
-    <video v-else autoplay muted loop class="video">
-      <source :src="props.item.fields.file.url" type="video/mp4">
+  <div v-show="props.isActiveSlide" class="work-gallery-slide">
+    <video v-if="props.item.filename.endsWith('mp4')" playsinline autoplay muted loop class="video">
+      <source :src="props.item.filename" type="video/mp4">
     </video>
+    <img v-else
+      :src="props.item.filename"
+      :alt="props.item.title"
+    >
   </div>
 </template>
 
@@ -29,13 +28,14 @@ const props = defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc($padding-y-md * 2) $padding-y-md;
-  width: 100%;
+  aspect-ratio: 1;
 
   img, .video {
+    aspect-ratio: 1;
+    object-fit: cover;
     height: 100%;
-    width: 100%;
-    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
   }
 }
 </style>
