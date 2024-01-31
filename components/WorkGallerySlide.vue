@@ -28,11 +28,12 @@ const props = defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1;
+  background: black;
+  width: 100%;
 
   img, .video {
     aspect-ratio: 1;
-    object-fit: cover;
+    object-fit: contain;
     height: 100%;
     max-height: 100%;
     max-width: 100%;

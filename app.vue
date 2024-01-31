@@ -3,6 +3,7 @@
     <div id="smooth-wrapper" ref="main">
       <div id="smooth-content">
         <NuxtPage />
+        <custom-cursor />
       </div>
     </div>
     <transition-element />

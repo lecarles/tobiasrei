@@ -1,32 +1,17 @@
 <template>
   <div class="work-gallery">
     <work-gallery-slide v-for="(item, i) in props.items" :key="item.id" :item="item" :is-active-slide="activeSlide === i" />
-    <div class="work-gallery-nav work-gallery-nav-md">
+    <div class="work-gallery-nav">
       <button @click="setActiveSlide(activeSlide - 1)" @mouseover="prevMouseover()" @mouseleave="prevMouseleave()" />
       <button @click="setActiveSlide(activeSlide + 1)" @mouseover="nextMouseover()" @mouseleave="nextMouseleave()" />
     </div>
-    <div class="work-gallery-nav work-gallery-nav-sm">
-      <button @click="setActiveSlide(activeSlide + 1)" />
-    </div>
-    <div class="work-gallery-slide-number md-d-none sm-d-block">
-      {{ activeSlide + 1 }} / {{ props.items.length }}
+    <div class="work-gallery-slide-number">
+      <div>←</div>
+      <div>{{ activeSlide + 1 }} / {{ props.items.length }}</div>
+      <div>→</div>
     </div>
     <div v-if="showTapMe" class="work-gallery-tap-me md-d-none sm-d-block">
       Toca'm!
-    </div>
-    <div class="work-gallery-thumbs-nav">
-      <div v-for="(item, i) in props.items" :key="item.id" class="work-gallery-slide">
-        <video v-if="item.filename.endsWith('mp4')" playsinline autoplay muted loop class="video">
-          <source :src="item.filename" type="video/mp4">
-        </video>
-        <img v-else
-          :src="item.filename"
-          :alt="item.title"
-        >
-        <div>
-          {{ i }}
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -57,8 +42,6 @@ function setActiveSlide (i) {
     activeSlide.value = 0
   }
 
-  console.log('yoo')
-
   showTapMe = false
 }
 
@@ -85,16 +68,6 @@ function nextMouseleave () {
   max-height: calc(100vh - $navbar-height - $padding-x-md * 2);
   max-width: 100%;
   position: relative;
-  aspect-ratio: 1;
-
-  &-thumbs-nav {
-    img, .video {
-      aspect-ratio: 1;
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-    }
-  }
 
   &-nav {
     width: 100%;
@@ -102,7 +75,7 @@ function nextMouseleave () {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 10;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20vw;
@@ -113,7 +86,7 @@ function nextMouseleave () {
       border: none;
       outline: none;
       background: none;
-      //cursor: none;
+      cursor: pointer;
     }
 
     &-sm {
@@ -123,11 +96,14 @@ function nextMouseleave () {
 
   &-slide-number {
     mix-blend-mode: difference;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     color: $gray;
     width: 100%;
     text-align: center;
     position: absolute;
-    bottom: $padding-x-sm;
+    bottom: 0;
+    padding: $padding-x-md;
     left: 0;
     right: 0;
     z-index: 1;
@@ -149,22 +125,7 @@ function nextMouseleave () {
 }
 @media (max-width: $sm-breakpoint) {
   .work-gallery {
-    grid-template-columns: 1fr;
     gap: 0;
-
-    &-nav {
-      &-sm {
-        display: block;
-
-        button {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      &-md {
-        display: none;
-      }
-    }
   }
 }
 </style>
