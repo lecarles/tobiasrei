@@ -34,6 +34,7 @@ useServerSeoMeta({
 })
 
 onMounted(() => {
+  sergiStore.cursorState = 'projectPage'
   /* gsap.registerPlugin(ScrollTrigger)  
 
   let st = ScrollTrigger.create({

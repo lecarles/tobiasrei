@@ -22,7 +22,7 @@
   }
 
   &-gray {
-    background: var(--white);
+    background: var(--background);
   }
 }
 </style>

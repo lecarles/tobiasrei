@@ -213,12 +213,12 @@
 
 /* COLOR */
 .bg-white {
-  background-color: $white;
+  background-color: var(--background);
 }
 
 .bg-black {
-  background-color: $black;
-  color: $white;
+  background-color: var(--background);
+  color: var(--background);
 }
 
 .bg-primary {
@@ -245,11 +245,11 @@
   color: var(--background)
 }
 .color-white {
-  color: $white;
+  color: var(--background);
 }
 
 .color-black {
-  color: $black;
+  color: var(--background);
 }
 
 .image {

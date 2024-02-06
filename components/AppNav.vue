@@ -1,11 +1,14 @@
 <template>
-  <div class="navbar navbar-wrapper font-size-sm">
+  <div class="navbar navbar-wrapper font-size-sm" @mouseenter="sergiStore.cursorState = 'nav'">
     <div class="navbar-md w-100" ref="navbar">
       <NuxtLink to="/" v-if="route.params.slug">imcarl.es</NuxtLink>
       <carl-button v-else>{{ $t('available') }}</carl-button>
-      <NuxtLink class="locale-change ml-auto" v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">{{
-      locale.name
-    }}</NuxtLink>
+      <link-wrapper class="locale-change ml-auto">
+        <NuxtLink v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">{{
+        locale.name
+      }}</NuxtLink>
+      </link-wrapper>
+      <dark-mode-btn />
     </div>
     <button class="navbar-sm-toggle" @click="toggleMenu()" ref="navbarButton">
       <svg viewBox="0 0 48.36 48.36" class="button-icon">
@@ -22,6 +25,7 @@
 </template>
 
 <script setup>
+import { useSergiStore } from '@/stores/sergiStore'
 import { computed, onMounted, ref } from 'vue'
 import gsap from 'gsap'
 
@@ -35,6 +39,7 @@ let menuTl
 
 const route = useRoute()
 const localePath = useLocalePath()
+const sergiStore = useSergiStore()
 
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()

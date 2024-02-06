@@ -1,11 +1,16 @@
 <template>
-  <a class="carl-link" :href="props.to">
-    <div class="link-text"><span class="arrow-left">→</span><slot></slot></div>
-    <div class="arrow-right ml-auto">→</div>
-  </a>
+  <div @mouseenter="enableHover()" @mouseleave="disableHover()">
+    <a class="carl-link" :href="props.to">
+      <div class="link-text"><span class="arrow-left">→</span><slot></slot></div>
+      <div class="arrow-right ml-auto">→</div>
+    </a>
+  </div>
 </template>
 
 <script setup>
+import { useSergiStore } from '@/stores/sergiStore'
+
+const sergiStore = useSergiStore()
 const localePath = useLocalePath()
 const props = defineProps({
   to: {
@@ -13,14 +18,22 @@ const props = defineProps({
     default: ''
   }
 })
+
+function enableHover() {
+  sergiStore.cursorHover = true
+}
+
+function disableHover() {
+  sergiStore.cursorHover = false
+}
 </script>
 
 <style lang="scss" scoped>
 .carl-link {
   display: flex;
   width: 100%;
-  border-top: 1px solid var(--black);
-  border-bottom: 1px solid var(--black);
+  border-top: 1px solid var(--foreground);
+  border-bottom: 1px solid var(--foreground);
   padding: .5em 0 .5em;
   overflow: hidden;
 

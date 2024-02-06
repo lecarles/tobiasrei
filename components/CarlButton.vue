@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="localePath(props.to)">
-      <div class="carl-button" ref="btn" @mousemove="handleMove($event)">
+      <div class="carl-button" ref="btn" @mouseenter="enableHover()" @mouseleave="disableHover()">
         <div class="carl-button-slot"><slot></slot></div>
         <div class="circle" ref="circle"></div>
       </div>
@@ -21,8 +21,6 @@ const sergiStore = useSergiStore()
 
 onMounted(() => {
   gsap.registerPlugin(CustomEase) 
-  xTo = gsap.quickTo(circle.value, "left", {duration: .01})
-  yTo = gsap.quickTo(circle.value, "top", {duration: .01})
 })
 
 const localePath = useLocalePath()
@@ -33,19 +31,12 @@ const props = defineProps({
   }
 })
 
-function handleMove(e) {
-  let w = circle.value.getBoundingClientRect().width/2
-  let h = circle.value.getBoundingClientRect().height/2
-  xTo(e.offsetX - w)
-  yTo(e.offsetY - h)
+function enableHover() {
+  sergiStore.cursorHover = true
 }
 
-function handleEnter() {
-  console.log('in')
-}
-
-function handleLeave() {
-  console.log('out')
+function disableHover() {
+  sergiStore.cursorHover = false
 }
 </script>
 
@@ -53,7 +44,7 @@ function handleLeave() {
 .carl-button {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--black);
+  border: 1px solid var(--foreground);
   border-radius: 10em;
   transition: .1s ease;
   align-items: center;
@@ -64,22 +55,23 @@ function handleLeave() {
   }
 
   &:hover {
-    color: var(--white);
+    color: var(--background);
     .circle {
-      height: 10em;
-      width: 10em;
+      height: 100%;
     }
   }
 
   .circle {
-    background: var(--black);
-    height: 1em;
-    width: 1em;
-    border-radius: 100%;
+    background: var(--foreground);
+    height: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
     position: absolute;
     z-index: -1;
     margin: 0 auto;
-    transition: .5s ease;
+    transition: height .2s ease;
   }
 }
 </style>

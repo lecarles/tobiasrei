@@ -98,7 +98,7 @@ function nextMouseleave () {
     mix-blend-mode: difference;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    color: $gray;
+    color: var(--background);
     width: 100%;
     text-align: center;
     position: absolute;
@@ -111,7 +111,7 @@ function nextMouseleave () {
 
   &-tap-me {
     mix-blend-mode: difference;
-    color: $magenta;
+    color: var(--secondary);
     width: 100%;
     text-align: center;
     position: absolute;

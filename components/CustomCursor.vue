@@ -1,56 +1,80 @@
 <template>
-  <div class="cursor-wrap" @mousemove="handleMove($event)">
-    <div class="cursor"></div>
-  </div>
+  <div class="cursor" ref="cursor"></div>
 </template>
 
 <script setup>
-import {ref, onMounted, computed} from 'vue'
 import { gsap } from 'gsap'
 import CustomEase from "gsap/CustomEase"
+import { onMounted, ref, watch } from 'vue'
 import { useSergiStore } from '@/stores/sergiStore'
+import { storeToRefs } from 'pinia'
 
 const sergiStore = useSergiStore()
 
-let xTo = null
-let yTo = null
+const cursor = ref(null)
+const { cursorHover, cursorState } = storeToRefs(sergiStore)
 
-onMounted(() => {
-  gsap.registerPlugin(CustomEase)
-  xTo = gsap.quickTo('.cursor', "x", {duration: .5, ease: CustomEase.create("custom", "M0,0,C0.084,0.6,0.194,0.892,0.548,0.968,0.667,0.993,0.831,1,1,1")})
-  yTo = gsap.quickTo('.cursor', "y", {duration: .5, ease: CustomEase.create("custom", "M0,0,C0.084,0.6,0.194,0.892,0.548,0.968,0.667,0.993,0.831,1,1,1")})
+let xSetter, ySetter
+let mouseX, mouseY
+
+watch(cursorHover, async (newHover, oldHover) => {
+  if (newHover === true) {
+    gsap.to(cursor.value, {
+      scale: 1.8,
+      duration: .25
+    })
+  } else {
+    gsap.to(cursor.value, {
+      scale: 1,
+      duration: .25
+    })
+  }
 })
 
-function handleMove(e) {
-  const cursorX = e.clientX/sergiStore.windowSize.x - 0.5
-  const cursorY = e.clientY/sergiStore.windowSize.y - 0.5
+watch(cursorState, async (newState, oldHover) => {
+  if (newState === 'home') {
+    
+    //timeline nest a quickto + a position absolute change onComplete?
+  } else {
+    //same but to pos fixed?
+  }
+})
 
-  xTo(cursorX)
-  yTo(cursorY)
+onMounted(() => {
+  gsap.registerPlugin(CustomEase)  
+  gsap.set(cursor.value, {xPercent: -50, yPercent: -50})
+  xSetter = gsap.quickTo(cursor.value, "x", {duration: 0.6, ease: "power3"})
+  ySetter = gsap.quickTo(cursor.value, "y", {duration: 0.6, ease: "power3"})
+  xSetter(sergiStore.windowSize.x/2)
+  ySetter(sergiStore.windowSize.y/2)
 
-  console.log('movv')
-}
+  document.addEventListener('mousemove', function (e) {
+    mouseX = e.clientX
+    mouseY = e.clientY
 
+    if (sergiStore.cursorState === 'home') {
+      xSetter(sergiStore.windowSize.x/2 + (mouseX/sergiStore.windowSize.x - 0.5) * sergiStore.windowSize.x * 0.1)
+      ySetter(sergiStore.windowSize.y/2 + (mouseY/sergiStore.windowSize.y - 0.5) * sergiStore.windowSize.y * 0.1)
+    } else {
+      xSetter(mouseX)
+      ySetter(mouseY)
+    }
+  })
+})
 </script>
 
 <style lang="scss" scoped>
-.cursor-wrap {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 4;
-}
 .cursor {
+  position: fixed;
   mix-blend-mode: difference;
   background-color: var(--secondary);
   fill: var(--secondary);
-  position: absolute;
-  height: 250px;
-  width: 250px;
+  width: 5vw;
+  height: 5vw;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 100;
   border-radius: 100%;
 }
 </style>

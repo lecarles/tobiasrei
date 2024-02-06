@@ -1,4 +1,7 @@
 <script setup>
+import { useSergiStore } from '@/stores/sergiStore'
+
+const sergiStore = useSergiStore()
 const localePath = useLocalePath()
 const props = defineProps({
   project: {
@@ -6,18 +9,28 @@ const props = defineProps({
     default: null
   }
 })
+
+function enableHover() {
+  sergiStore.cursorHover = true
+}
+
+function disableHover() {
+  sergiStore.cursorHover = false
+}
 </script>
 
 <template>
-  <nuxt-link class="project-item" :to="props.project.full_slug">
-    <clipped-frame>
-      <template v-if="props.project.content.featuredMedia.filename">
-        <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay muted loop playsinline></video>
-        <img v-else :src="props.project.content.featuredMedia.filename">
-      </template>
-    </clipped-frame>    
-    <div class="project-item-title">{{props.project.content.title}}</div>
-  </nuxt-link>
+  <div @mouseenter="enableHover()" @mouseleave="disableHover()">
+    <nuxt-link class="project-item" :to="props.project.full_slug">
+      <clipped-frame>
+        <template v-if="props.project.content.featuredMedia.filename">
+          <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay muted loop playsinline></video>
+          <img v-else :src="props.project.content.featuredMedia.filename">
+        </template>
+      </clipped-frame>    
+      <div class="project-item-title">{{props.project.content.title}}</div>
+    </nuxt-link>
+  </div>
 </template>
 
 

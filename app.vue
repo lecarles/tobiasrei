@@ -1,9 +1,9 @@
 <template>
   <div>
+    <custom-cursor />
     <div id="smooth-wrapper" ref="main">
       <div id="smooth-content">
         <NuxtPage />
-        <custom-cursor />
       </div>
     </div>
     <transition-element />
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
+import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollSmoother from 'gsap/ScrollSmoother'
 import { onMounted, onUnmounted, ref } from 'vue'
@@ -51,6 +51,10 @@ function onResize() {
 </script>
 
 <style lang="scss">
+.page-wrapper {
+  position: relative;
+}
+
 .wrapper { 
   background: var(--background);
 }
