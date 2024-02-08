@@ -24,7 +24,7 @@ function disableHover() {
     <nuxt-link class="project-item" :to="props.project.full_slug">
       <clipped-frame>
         <template v-if="props.project.content.featuredMedia.filename">
-          <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay muted loop playsinline></video>
+          <video v-if="props.project.content.featuredMedia.filename.endsWith('mp4')" :src="props.project.content.featuredMedia.filename" autoplay disableRemotePlayback muted loop playsinline></video>
           <img v-else :src="props.project.content.featuredMedia.filename">
         </template>
       </clipped-frame>    

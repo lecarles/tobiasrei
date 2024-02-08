@@ -49,6 +49,20 @@ const availableLocales = computed(() => {
 
 onMounted(() => {
   setupMenu()
+  gsap.set(navbar.value, {
+    opacity: 1
+  })
+  gsap.fromTo(navbar.value.children, {
+    y: 30,
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+    y: 0,
+    duration: .5,
+    stagger: .1,
+    ease: 'power3'
+  })
 })
 
 function toggleMenu() {
@@ -141,6 +155,7 @@ function setupTl() {
   }
 
   &-md {
+    opacity: 0;
     display: flex;
     gap: 1rem;
     text-align: right;
@@ -161,12 +176,6 @@ function setupTl() {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: .3rem;
-  }
-
-  .navbar .logo-acord {
-    line-height: 1;
-    margin-right: auto;
-    display: block;
   }
 
   .navbar-md {

@@ -1,14 +1,16 @@
 <template>
   <div class="work-gallery">
-    <work-gallery-slide v-for="(item, i) in props.items" :key="item.id" :item="item" :is-active-slide="activeSlide === i" />
-    <div class="work-gallery-nav">
-      <button @click="setActiveSlide(activeSlide - 1)" @mouseover="prevMouseover()" @mouseleave="prevMouseleave()" />
-      <button @click="setActiveSlide(activeSlide + 1)" @mouseover="nextMouseover()" @mouseleave="nextMouseleave()" />
+    <div clas="work-gallery-slide-wrapper">
+      <work-gallery-slide v-for="(item, i) in props.items" :key="item.id" :item="item" :is-active-slide="activeSlide === i" />
+      <div class="work-gallery-nav">
+        <button @click="setActiveSlide(activeSlide - 1)" @mouseover="prevMouseover()" @mouseleave="prevMouseleave()" />
+        <button @click="setActiveSlide(activeSlide + 1)" @mouseover="nextMouseover()" @mouseleave="nextMouseleave()" />
+      </div>
     </div>
     <div class="work-gallery-slide-number">
-      <div>←</div>
+      <carl-button @click="setActiveSlide(activeSlide - 1)">←</carl-button>
       <div>{{ activeSlide + 1 }} / {{ props.items.length }}</div>
-      <div>→</div>
+      <carl-button @click="setActiveSlide(activeSlide + 1)">→</carl-button>
     </div>
     <div v-if="showTapMe" class="work-gallery-tap-me md-d-none sm-d-block">
       Toca'm!
@@ -64,10 +66,17 @@ function nextMouseleave () {
 
 <style lang="scss">
 .work-gallery {
-  display: flex;
-  max-height: calc(100vh - $navbar-height - $padding-x-md * 2);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  gap: $padding-x-md;
+  max-height: 100%;
   max-width: 100%;
   position: relative;
+
+  &-slide-wrapper {
+    position: relative;
+  }
 
   &-nav {
     width: 100%;
@@ -95,17 +104,12 @@ function nextMouseleave () {
   }
 
   &-slide-number {
-    mix-blend-mode: difference;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    color: var(--background);
-    width: 100%;
+    display: flex;
+    color: var(--foreground);
+    gap: 1em;
+    align-self: center;
+    justify-self: center;
     text-align: center;
-    position: absolute;
-    bottom: 0;
-    padding: $padding-x-md;
-    left: 0;
-    right: 0;
     z-index: 1;
   }
 

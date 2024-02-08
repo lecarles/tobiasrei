@@ -1,10 +1,8 @@
 <template>
-  <nuxt-link :to="localePath(props.to)">
-      <div class="carl-button" ref="btn" @mouseenter="enableHover()" @mouseleave="disableHover()">
-        <div class="carl-button-slot"><slot></slot></div>
-        <div class="circle" ref="circle"></div>
-      </div>
-  </nuxt-link>
+  <div class="carl-button" ref="btn" @mouseenter="enableHover()" @mouseleave="disableHover()">
+    <div class="carl-button-slot"><slot></slot></div>
+    <div class="circle" ref="circle"></div>
+  </div>
 </template>
 
 <script setup>
@@ -24,12 +22,6 @@ onMounted(() => {
 })
 
 const localePath = useLocalePath()
-const props = defineProps({
-  to: {
-    type: String,
-    default: ''
-  }
-})
 
 function enableHover() {
   sergiStore.cursorHover = true
@@ -40,7 +32,7 @@ function disableHover() {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .carl-button {
   position: relative;
   overflow: hidden;
@@ -49,13 +41,23 @@ function disableHover() {
   transition: .1s ease;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
 
   &-slot {
-    padding: .25em .75em;
+    padding: .2em .75em .05em;
+
+    a {
+      color: inherit;      
+    }
   }
 
   &:hover {
     color: var(--background);
+
+    a:hover {
+      color: var(--background);
+    }
     .circle {
       height: 100%;
     }

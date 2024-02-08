@@ -1,11 +1,6 @@
 <template>
   <div class="projects-section p-md" ref="projectsSection" @mouseenter="mouseenter()">
-    <div class="projects-section-title font-size-sm">
-      <div>
-        <span>Projectes <sup>{{data.stories.length}}</sup></span>
-      </div>
-      <div class="projects-section-separator mb-row"></div>
-    </div>
+    <section-separator><span>Projectes <sup>{{data.stories.length}}</sup></span></section-separator>
     <div class="projects-section-grid grid-3">
       <project-item v-for="project in data.stories" :key="project.uuid" :project="project"></project-item>
     </div>
@@ -55,13 +50,6 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .projects-section {
-  &-separator {
-    margin-top: .5em;
-    height: 2px;
-    width: 100%;
-    background: var(--foreground);
-  }
-
   &-grid {
     row-gap: calc($col-gap * 0.5)
   }

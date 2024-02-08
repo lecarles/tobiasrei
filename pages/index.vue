@@ -30,9 +30,9 @@ function mouseenter() {
   <div class="main-page font-size-sm">
     <app-nav />
     <div class="intro-section" @mouseenter="mouseenter()">
-      <div class="intro-text p-md font-size-xl">
+      <gsap-lines class="intro-text p-md font-size-xl">
         {{ data.story.content.introText }}
-      </div>
+      </gsap-lines>
     </div>
     <ProjectsSection></ProjectsSection>
     <email-section />
@@ -45,7 +45,7 @@ function mouseenter() {
   height: calc(80vh - $navbar-height);
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .intro-text {

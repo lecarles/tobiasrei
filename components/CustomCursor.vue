@@ -33,9 +33,16 @@ watch(cursorHover, async (newHover, oldHover) => {
 
 watch(cursorState, async (newState, oldHover) => {
   if (newState === 'home') {
-    
+    gsap.to(cursor.value, {
+      scale: 6,
+      duration: .25
+    })
     //timeline nest a quickto + a position absolute change onComplete?
   } else {
+    gsap.to(cursor.value, {
+      scale: 1,
+      duration: .25
+    })
     //same but to pos fixed?
   }
 })
@@ -45,8 +52,16 @@ onMounted(() => {
   gsap.set(cursor.value, {xPercent: -50, yPercent: -50})
   xSetter = gsap.quickTo(cursor.value, "x", {duration: 0.6, ease: "power3"})
   ySetter = gsap.quickTo(cursor.value, "y", {duration: 0.6, ease: "power3"})
-  xSetter(sergiStore.windowSize.x/2)
-  ySetter(sergiStore.windowSize.y/2)
+  gsap.set(cursor.value, {
+    x: sergiStore.windowSize.x/2,
+    y: sergiStore.windowSize.y/2
+  })
+  gsap.to(cursor.value, {
+    scale: 5,
+    duration: .25,
+    ease: "power3",
+    delay: 1
+  })
 
   document.addEventListener('mousemove', function (e) {
     mouseX = e.clientX
@@ -76,5 +91,6 @@ onMounted(() => {
   pointer-events: none;
   z-index: 100;
   border-radius: 100%;
+  transform: scale(0);
 }
 </style>
