@@ -1,9 +1,9 @@
 <template>
-  <div class="section-separator font-size-sm" ref="sectionSeparator">
-    <div class="section-title">
+  <div class="section-separator font-size-sm">
+    <div class="section-title" ref="separatorTitle">
       <slot/>
     </div>
-    <div class="section-separator-line mb-row"></div>
+    <div class="section-separator-line mb-row" ref="separatorLine"></div>
   </div>
 </template>
 
@@ -12,10 +12,10 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import CustomEase from "gsap/CustomEase"
-import { SplitText } from "gsap/SplitText"
 
 let anim = null
-const sectionSeparator = ref(null)
+const separatorTitle = ref(null)
+const separatorLine = ref(null)
 
 const props = defineProps({
   delay: {
@@ -31,34 +31,35 @@ onMounted(() => {
   animateSeparator()
 })
 
-function animateLetters() {
+function animateSeparator() {
   anim = gsap.timeline({delay: props.delay, defaults: { ease: CustomEase.create("custom", "M0,0,C0.084,0.6,0.194,0.892,0.548,0.968,0.667,0.993,0.831,1,1,1"),}})
-  anim.to(gsapLines.value, {
+  anim.to(separatorTitle.value, {
     opacity: 1,
-    duration: .01
-  })
-  anim.fromTo(splitLines.lines, {
-    y: '60%',
-  },
-  {
     y: 0,
-    duration: 1,
-    stagger: 0.15,
-  })
-  anim.to(splitLines.lines, {
-    opacity: 1,
-    duration: .5,
+    duration: .35,
     stagger: .1
+  })
+  anim.to(separatorLine.value,
+  {
+    width: '100%',
+    duration: 1,
   }, '<0.1')
 }
 </script>
 
 <style lang="scss">
 .section-separator {
+  .section-title {
+    opacity: 0;
+    transform: translateY(30px);
+    display: flex;
+    width: 100%;
+  }
+
   &-line {
     margin-top: .5em;
     height: 2px;
-    width: 100%;
+    width: 0;
     background: var(--foreground);
   }
 }
