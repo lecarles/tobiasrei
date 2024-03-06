@@ -1,0 +1,36 @@
+$col-gap: clamp(.9rem, 1.75vw, 2.25rem);
+$row-gap: clamp(.9rem, 1.75vw, 2.25rem);
+$col-gap-xl: calc($col-gap * 2);
+$row-gap-xl: calc($row-gap * 2);
+
+$sm-breakpoint: 950px;
+$md-breakpoint: 950px;
+$xl-breakpoint: 1600px;
+
+$font-size-sm: clamp(1.2rem, 1vw, 2rem);
+$font-size-md: clamp(1.4rem, 1.5vw, 3rem);
+$font-size-mdlg: clamp(2.25rem, 2.5vw, 6rem);
+$font-size-lg: clamp(2.75rem, 4vw, 12rem);
+$font-size-xl: clamp(4rem, 8vw, 25rem);
+
+$line-height-base: 1.15;
+$font-family-sans: "Apfel Grotezk", sans-serif;
+$font-weight: 500;
+
+$padding-x-sm: calc($col-gap * .75);
+$padding-x-md: $col-gap;
+$padding-x-lg: calc($col-gap * 2);
+
+$padding-y-sm: calc($row-gap * .75);
+$padding-y-md: $row-gap;
+$padding-y-lg: calc($row-gap * 2);
+
+$navbar-height: calc($font-size-sm * 1.4 + $padding-x-md + $font-size-sm * 0.6);
+$navbar-height-sm: calc($font-size-sm * 1.4 + $padding-x-md * 2 + $font-size-sm * 0.4);
+
+html {
+  --primary: rgb(71, 221, 39);
+  --background: #f3f3f3;
+  --foreground: #0c0c0c;
+  --secondary: rgb(150, 0, 200);
+}

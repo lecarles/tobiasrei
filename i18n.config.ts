@@ -1,0 +1,52 @@
+export default defineI18nConfig(() => ({
+legacy: false,
+  locale: 'ca',
+  messages: {
+    ca: {
+      available: 'Disponible a partir de juny (2024)',
+      projects: 'Projectes',
+      contact: 'Contacte i CV',
+      about: 'Sobre mi',
+      summary: 'Sóc Carles! Tinc 24 anys, visc a València i m’apassiona el disseny gràfic des de que tinc memòria. Faig qualsevol tipus de projecte, i m’agrada especialment treballar en aquells que tenen un fondo social i divulgatiu. Crec en el disseny com una ferramenta per a ajudar a entendre i estimar el món que ens envolta.',
+      studies: 'Estudies',
+      cau: 'Grau en Comunicació Audiovisual (Universitat Politècnica de València)',
+      erasmus: 'BA Integrated Design (Erasmus a Köln International School of Design)',
+      master: 'Màster en disseny de publicacions (EASD València)',
+      experience: 'Experiència laboral',
+      freelance: 'Activitat com a dissenyador freelance',
+      compromis: 'Disseny gràfic i desenvolupament web a Compromís',
+      kukut: 'Disseny gràfic i desenvolupament web a Kukut Estudio',
+      tech: 'Coneixements tècnics',
+      langs: 'Llengües',
+      valencia: 'Valencià (natiu, C2 JQCV)',
+      castella: 'Castellà',
+      english: 'Anglés (C2)',
+      german: 'Alemany (B1)',
+      footera: 'Web dissenyada i desenvolupada per mi :)',
+      footerb: 'Contacta’m si en vols una!'
+    },
+    en: {
+      available: 'Available from June 2024',
+      projects: 'Projects',
+      about: 'About me',
+      contact: 'About & CV',
+      summary: 'I’m a 24 year old graphic designer and web developer based in València. I create conscious projects with a strong narrative. I believe in design as a tool to better understand and appreciate the world around us.',
+      studies: 'Studies',
+      cau: 'Degree in Audiovisual Communication (Universitat Politècnica de València)',
+      erasmus: 'BA Integrated Design (Erasmus at Köln International School of Design)',
+      master: 'Masters Degree in editorial Design (EASD València)',
+      experience: 'Work experience',
+      freelance: 'Freelance graphic designer',
+      compromis: 'Graphic design and web development at Compromís',
+      kukut: 'Graphic design and web development at Kukut Estudio',
+      tech: 'Tools and tecnologies',
+      langs: 'Languages',
+      valencia: 'Catalan',
+      castella: 'Spanish',
+      english: 'English (C2)',
+      german: 'German (B1)',
+      footera: 'This website was designed and developed by me :)',
+      footerb: 'Contact me if you want one!'
+    }
+  }
+}))
