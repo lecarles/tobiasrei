@@ -15,9 +15,7 @@ const { data } = await storyblokApi.get('cdn/stories/home')
 
 <template>
   <div class="main-page font-size-sm">
-    <app-nav />
-    <div>{{ data.story.content.work }}</div>
-    <div>{{ data.story.content.diary }}</div>
+    <photo-carousel :images="data.story.content.work" />
     <app-footer />
   </div>
 </template>

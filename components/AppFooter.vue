@@ -1,8 +1,7 @@
 <template>
   <div class="footer font-size-sm p-md">
     <div class="footer-links">
-      <link-wrapper class="mr-auto"><a target="_blank" href="https://www.instagram.com/imcarl.es/">Instagram</a></link-wrapper>
-      <link-wrapper><a href="mailto:hola@imcarl.es">hola@imcarl.es</a></link-wrapper>
+      afasasd
     </div>
   </div>
 </template>
