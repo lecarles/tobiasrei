@@ -2,20 +2,19 @@
   <div class="carousels">
     <div class="photo-carousel">
       <div ref="photos" class="photo-container" v-for="(photo, i) in props.images" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="">
+        <img :src="photo.filename + '/m/1400x0'" alt="" :style="randomPosition()">
       </div>
     </div>
     <div class="photo-carousel-v">
       <div ref="photosV" class="photo-container" v-for="(photo, i) in props.imagesV" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="">
+        <img :src="photo.filename + '/m/1400x0'" alt="" :style="randomPosition()">
       </div>
     </div>
     <div class="controls">
-      <button class="left" @click="next()">l</button>
-      <button class="right" @click="previous()">r</button>
-      <button class="up" @click="nextV()">up</button>
-      <button class="down" @click="previousV()">dwn</button>
-      <button @click="shift()">shft</button>
+      <button class="left" @click="left()">l</button>
+      <button class="right" @click="right()">r</button>
+      <button class="up" @click="up()">up</button>
+      <button class="down" @click="down()">dwn</button>
     </div>
   </div>
 </template>
@@ -38,6 +37,8 @@ let loop
 let loopV
 
 let shiftTl
+
+let shiftRight
 let shifted = ref(false)
 
 onMounted(() => {
@@ -45,14 +46,6 @@ onMounted(() => {
   gsap.registerPlugin(InertiaPlugin)
   gsap.registerPlugin(CustomEase)
   gsap.registerPlugin(Observer)
-
-  shiftTl = gsap.timeline({paused: true})
-  shiftTl.to('.photo-carousel', {
-    xPercent: -100,
-  })
-  shiftTl.to('.photo-carousel-v', {
-    y: 0,
-  })
 
   setupLoop()
 })
@@ -76,33 +69,131 @@ function setupLoop() {
   }
 }
 
-function shift() {
-  shifted.value ? shiftTl.tweenFromTo(shiftTl.duration(), 0, {duration: 1.4, ease: "power4.inOut"}) : shiftTl.tweenFromTo(0, shiftTl.duration(), {duration: 2.5, ease: "power3.inOut"})
-  shifted.value = !shifted.value
+function to(i) {
+  loop.toIndex(i, {duration: .8, ease: "power3.inOut"})
 }
 
-function to(i) {
-  loop.toIndex(i, {duration: 1.4, ease: "power4.inOut"})
+
+let positionsX = ['left', 'right'] 
+let positionsY = ['top', 'bottom']
+let sizes = [2, 3, 4]
+let positions = [1, 2, 3, 4]
+
+function randomPosition() {
+  let colSize = sizes[Math.floor(Math.random() * sizes.length)]
+  let colPosition = positions[Math.floor(Math.random() * positions.length)]
+  let rowSize = sizes[Math.floor(Math.random() * sizes.length)]
+  let rowPosition = positions[Math.floor(Math.random() * positions.length)]
+
+  if (colPosition + colSize > 6) {
+    colPosition = 6 - colSize
+  }
+
+  if (rowPosition + rowSize > 6) {
+    rowPosition = 6 - rowSize
+  }
+
+  return {
+    objectPosition: `${positionsX[Math.floor(Math.random() * positionsX.length)]} ${positionsY[Math.floor(Math.random() * positionsY.length)]}`,
+    gridColumn: `${colPosition} / span ${colSize}`,
+    gridRow: `${rowPosition} / span ${rowSize}`,
+  }
 }
 
 function toV(i) {
-  loopV.toIndex(i, {duration: 1.4, ease: "power4.inOut"})
+  loopV.toIndex(i, {duration: .8, ease: "power3.inOut"})
 }
 
-function next() {
-  shifted.value ? shift() : loop.next({duration: 1.4, ease: "power4.inOut"})
+function right() {
+  if (shifted.value === true) {
+    console.log('shifted right')
+    gsap.to('.photo-carousel-v', {
+      y: '100%',
+      duration: .8, 
+      ease: "power3.inOut",
+    })
+    gsap.set('.photo-carousel', {
+      xPercent: -100
+    })
+    gsap.to('.photo-carousel', {
+      xPercent: 0,
+      duration: .8, 
+      ease: "power3.inOut",
+      delay: .2
+    })
+    shifted.value = !shifted.value
+  } else {
+    loop.previous({duration: .8, ease: "power3.inOut"})
+  } 
 }
 
-function previous() {
-  shifted.value ? shift() : loop.previous({duration: 1.4, ease: "power4.inOut"})
+function left() {
+  if (shifted.value === true) {
+    console.log('shifted left')
+    gsap.to('.photo-carousel-v', {
+      y: '100%',
+      duration: .8, 
+      ease: "power3.inOut"
+    })
+    gsap.set('.photo-carousel', {
+      xPercent: 100
+    })
+    gsap.to('.photo-carousel', {
+      xPercent: 0,
+      duration: .8, 
+      ease: "power3.inOut",
+      delay: .2
+    })
+    shifted.value = !shifted.value
+  } else {
+    loop.next({duration: .8, ease: "power3.inOut"})
+  } 
 }
 
-function nextV() {
-  shifted.value ? loopV.next({duration: 1.4, ease: "power4.inOut"}) : shift()
+function up() {
+  if (shifted.value === false) {
+    console.log('shifted up')
+    gsap.to('.photo-carousel', {
+      xPercent: 100,
+      duration: .8, 
+      ease: "power3.inOut",
+    })
+    gsap.set('.photo-carousel-v', {
+      y: '100%',
+    })
+    gsap.to('.photo-carousel-v', {
+      y: 0,
+      duration: .8, 
+      ease: "power3.inOut",
+      delay: .2
+    })
+    shifted.value = !shifted.value
+  } else {
+    loopV.next({duration: .8, ease: "power3.inOut"})
+  }
 }
 
-function previousV() {
-  shifted.value ? loopV.previous({duration: 1.4, ease: "power4.inOut"}) : shift()
+function down() {
+  if (shifted.value === false) {
+    console.log('shifted dwn')
+    gsap.to('.photo-carousel', {
+      xPercent: 100,
+      duration: .8, 
+      ease: "power3.inOut"
+    })
+    gsap.set('.photo-carousel-v', {
+      y: '-100%'
+    })
+    gsap.to('.photo-carousel-v', {
+      y: 0,
+      duration: .8, 
+      ease: "power3.inOut",
+      delay: .2
+    })
+    shifted.value = !shifted.value
+  } else {
+    loopV.previous({duration: .8, ease: "power3.inOut"})
+  }
 }
 
 const props = defineProps({
@@ -129,7 +220,7 @@ const props = defineProps({
   position: absolute;
   inset: 0;
   display: grid;
-  height: 90vh;
+  height: 100%;
   overflow: hidden;
   grid-template-rows: 1fr;
   grid-template-columns: 100vw;
@@ -137,11 +228,10 @@ const props = defineProps({
 
   .photo-container {
     position: relative;
-    width: 100vw;
-    height: 90vh;
     display: grid;
     grid-template-columns: repeat(5, 20vw);
-    grid-template-rows: repeat(5, 15vh);
+    grid-template-rows: repeat(5, 20vh);
+    background: white;
   }
 
   img {
@@ -149,26 +239,21 @@ const props = defineProps({
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: left top;
-    grid-row: 3/-1;
-    grid-column: 3/-1;
   }
 }
 
 .photo-carousel-v {
+  transform: translateY(-100%);
   height: 100vh;
   overflow: hidden;
   position: absolute;
   inset: 0;
-  transform: translateY(-100%);
 
   .photo-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-columns: repeat(5, 20vw);
-    grid-template-rows: repeat(5, 15vh);
+    grid-template-rows: repeat(5, 20vh);
   }
 
   img {
@@ -176,9 +261,6 @@ const props = defineProps({
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: left top;
-    grid-row: span 4;
-    grid-column: span 4;
   }
 }
 
