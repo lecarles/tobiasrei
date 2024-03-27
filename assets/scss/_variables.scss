@@ -7,14 +7,14 @@ $sm-breakpoint: 950px;
 $md-breakpoint: 950px;
 $xl-breakpoint: 1600px;
 
-$font-size-sm: clamp(1.2rem, 1vw, 2rem);
+$font-size-sm: clamp(1rem, .8vw, 1.5rem);
 $font-size-md: clamp(1.4rem, 1.5vw, 3rem);
 $font-size-mdlg: clamp(2.25rem, 2.5vw, 6rem);
 $font-size-lg: clamp(2.75rem, 4vw, 12rem);
 $font-size-xl: clamp(4rem, 8vw, 25rem);
 
 $line-height-base: 1.15;
-$font-family-sans: "Apfel Grotezk", sans-serif;
+$font-family-sans: "Overpass Mono", monospace;
 $font-weight: 500;
 
 $padding-x-sm: calc($col-gap * .75);

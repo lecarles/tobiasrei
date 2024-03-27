@@ -15,6 +15,7 @@ const { data } = await storyblokApi.get('cdn/stories/home')
 
 <template>
   <div class="main-page font-size-sm">
+    <app-nav />
     <photo-carousel :images="data.story.content.work" :imagesV="data.story.content.diary" />
   </div>
 </template>

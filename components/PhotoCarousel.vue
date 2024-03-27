@@ -10,12 +10,13 @@
         <img :src="photo.filename + '/m/1400x0'" alt="" :style="randomPosition()">
       </div>
     </div>
-    <div class="controls">
-      <button class="left" @click="left()">l</button>
-      <button class="right" @click="right()">r</button>
-      <button class="up" @click="up()">up</button>
-      <button class="down" @click="down()">dwn</button>
+    <div class="controls font-size-sm">
+      <button @mouseenter="handlemouse('left')" class="left" @click="left()">←</button>
+      <button @mouseenter="handlemouse('right')" class="right" @click="right()">→</button>
+      <button @mouseenter="handlemouse('up')" class="up" @click="up()">↑</button>
+      <button @mouseenter="handlemouse('down')" class="down" @click="down()">↓</button>
     </div>
+    <custom-cursor :hover="direction"/>
   </div>
 </template>
 
@@ -36,10 +37,13 @@ const photosV = ref(null)
 let loop
 let loopV
 
-let shiftTl
-
-let shiftRight
+let direction = ref(null)
 let shifted = ref(false)
+
+function handlemouse(dir) {
+  direction.value = dir
+  console.log(dir)
+}
 
 onMounted(() => {
   gsap.registerPlugin(Draggable)
@@ -106,7 +110,6 @@ function toV(i) {
 
 function right() {
   if (shifted.value === true) {
-    console.log('shifted right')
     gsap.to('.photo-carousel-v', {
       y: '100%',
       duration: .8, 
@@ -129,7 +132,6 @@ function right() {
 
 function left() {
   if (shifted.value === true) {
-    console.log('shifted left')
     gsap.to('.photo-carousel-v', {
       y: '100%',
       duration: .8, 
@@ -152,7 +154,6 @@ function left() {
 
 function up() {
   if (shifted.value === false) {
-    console.log('shifted up')
     gsap.to('.photo-carousel', {
       xPercent: 100,
       duration: .8, 
@@ -175,7 +176,6 @@ function up() {
 
 function down() {
   if (shifted.value === false) {
-    console.log('shifted dwn')
     gsap.to('.photo-carousel', {
       xPercent: 100,
       duration: .8, 
@@ -216,22 +216,17 @@ const props = defineProps({
   overflow: hidden;
 }
 
-.photo-carousel {
+.photo-carousel, .photo-carousel-v {
   position: absolute;
   inset: 0;
-  display: grid;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
-  grid-template-rows: 1fr;
-  grid-template-columns: 100vw;
-  grid-auto-flow: column;
 
   .photo-container {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(5, 20vw);
     grid-template-rows: repeat(5, 20vh);
-    background: white;
+    position: relative;
   }
 
   img {
@@ -240,53 +235,69 @@ const props = defineProps({
     height: 100%;
     object-fit: contain;
   }
+}
+
+.photo-carousel {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 100vw;
+  grid-auto-flow: column;
 }
 
 .photo-carousel-v {
   transform: translateY(-100%);
-  height: 100vh;
-  overflow: hidden;
-  position: absolute;
-  inset: 0;
-
-  .photo-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(5, 20vw);
-    grid-template-rows: repeat(5, 20vh);
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 }
 
 .controls {
-  .left {
-    position: fixed;
-    top: 50%;
-    left: 0;
+  display: grid;
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "l u u r"
+    "l u u r"
+    "l . . r"
+    "l d d r"
+    "l d d r"; 
   }
 
-  .right {
-    position: fixed;
-    top: 50%;
-    right: 0;
+  .left, .right, .up, .down {
+    display: flex;
+  } 
+
+  .left { 
+    grid-area: l; 
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .right { 
+    grid-area: r; 
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .up { 
+    grid-area: u; 
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .down { 
+    grid-area: d; 
+    justify-content: center;
+    align-items: flex-end;
   }
 
-  .up {
-    position: fixed;
-    left: 50%;
-    top: 0;
+  button {
+    font-size: inherit;
+    font-family: inherit;
+    outline: none;
+    background: none;
+    border: none;
+    padding: 1em;
+    display: flex;
   }
 
-  .down {
-    position: fixed;
-    left: 50%;
-    bottom: 0;
-  }
-}
 </style>
