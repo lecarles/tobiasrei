@@ -2,12 +2,20 @@
   <div class="carousels">
     <div class="photo-carousel">
       <div ref="photos" class="photo-container" v-for="(photo, i) in props.images" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="" :style="randomPosition()">
+        <img :src="photo.filename + '/m/1400x0'" alt="" :style="{
+          gridColumn: arr[i].gridColumn,
+          gridRow: arr[i].gridRow,
+          objectPosition: arr[i].objectPosition
+        }">
       </div>
     </div>
     <div class="photo-carousel-v">
       <div ref="photosV" class="photo-container" v-for="(photo, i) in props.imagesV" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="" :style="randomPosition()">
+        <img :src="photo.filename + '/m/1400x0'" alt="" :style="{
+          gridColumn: arr[i+40].gridColumn,
+          gridRow: arr[i+40].gridRow,
+          objectPosition: arr[i+40].objectPosition
+        }">
       </div>
     </div>
     <div class="controls font-size-sm">
@@ -77,13 +85,14 @@ function to(i) {
   loop.toIndex(i, {duration: .8, ease: "power3.inOut"})
 }
 
+  let arr = []
+  let positionsX = ['left', 'right'] 
+  let positionsY = ['top', 'bottom']
+  let sizes = [2, 3, 4]
+  let positions = [1, 2, 3, 4]
 
-let positionsX = ['left', 'right'] 
-let positionsY = ['top', 'bottom']
-let sizes = [2, 3, 4]
-let positions = [1, 2, 3, 4]
 
-function randomPosition() {
+for(let i = 0; i < 80; i++) {
   let colSize = sizes[Math.floor(Math.random() * sizes.length)]
   let colPosition = positions[Math.floor(Math.random() * positions.length)]
   let rowSize = sizes[Math.floor(Math.random() * sizes.length)]
@@ -97,11 +106,11 @@ function randomPosition() {
     rowPosition = 6 - rowSize
   }
 
-  return {
+  arr.push({
     objectPosition: `${positionsX[Math.floor(Math.random() * positionsX.length)]} ${positionsY[Math.floor(Math.random() * positionsY.length)]}`,
     gridColumn: `${colPosition} / span ${colSize}`,
     gridRow: `${rowPosition} / span ${rowSize}`,
-  }
+  })
 }
 
 function toV(i) {
