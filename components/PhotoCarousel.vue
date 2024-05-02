@@ -1,29 +1,29 @@
 <template>
   <div class="carousels">
     <div class="photo-carousel">
-      <div ref="photos" class="photo-container" v-for="(photo, i) in props.images" :key="photo.id" @click="to(i)">
+      <div ref="photos" class="photo-container" v-for="photo in props.images" :key="photo.id">
         <photo-item :image="photo.filename" />
       </div>
     </div>
     <div class="photo-carousel-v">
-      <div ref="photosV" class="photo-container" v-for="(photo, i) in props.imagesV" :key="photo.id" @click="to(i)">
+      <div ref="photosV" class="photo-container" v-for="photo in props.imagesV" :key="photo.id">
         <photo-item :image="photo.filename" />
       </div>
     </div>
     <div class="controls font-size-sm">
-      <button @mouseenter="handlemouse('left')" class="left" @click="left()">←</button>
-      <button @mouseenter="handlemouse('right')" class="right" @click="right()">→</button>
-      <button @mouseenter="handlemouse('up')" class="up" @click="up()">↑</button>
-      <button @mouseenter="handlemouse('down')" class="down" @click="down()">↓</button>
+      <button @mouseenter="handlemouse('left')" class="left" @click="left()"></button>
+      <button @mouseenter="handlemouse('right')" class="right" @click="right()"></button>
+      <button @mouseenter="handlemouse('up')" class="up" @click="up()"></button>
+      <button @mouseenter="handlemouse('down')" class="down" @click="down()"></button>
+      <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div>
     </div>
-    <custom-cursor :hover="direction"/>
+    <custom-cursor />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
-import { Observer } from 'gsap/Observer'
 import { Draggable } from 'gsap/Draggable'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import CustomEase from "gsap/CustomEase"
@@ -32,35 +32,25 @@ import verticalLoop from '@/helpers/verticalLoop'
 import { useTobiasStore } from '@/stores/tobiasStore'
 
 const tobiasStore = useTobiasStore()
-
-let observer
-
 const photos = ref(null)
 const photosV = ref(null)
 let loop
 let loopV
-
-let direction = ref(null)
 let shifted = ref(false)
 
 function handlemouse(dir) {
-  direction.value = dir
-  console.log(dir)
+  tobiasStore.direction = dir
 }
 
 onMounted(() => {
   gsap.registerPlugin(Draggable)
   gsap.registerPlugin(InertiaPlugin)
   gsap.registerPlugin(CustomEase)
-  gsap.registerPlugin(Observer)
+
+  tobiasStore.workLength = props.images.length 
+  tobiasStore.diaryLength = props.imagesV.length
 
   setupLoop()
-})
-
-onBeforeUnmount(() => {
-  if(observer) {
-    observer.kill()
-  }
 })
 
 function setupLoop() {
@@ -86,6 +76,7 @@ function toV(i) {
 
 function right() {
   if (shifted.value === true) {
+    loop.previous({duration: .05})
     gsap.to('.photo-carousel-v', {
       y: '100%',
       duration: .8, 
@@ -103,11 +94,13 @@ function right() {
     shifted.value = !shifted.value
   } else {
     loop.previous({duration: .8, ease: "power3.inOut"})
-  } 
+  }
+  tobiasStore.currentWork + 1 > props.images.length ? tobiasStore.currentWork = 1 : tobiasStore.currentWork++
 }
 
 function left() {
   if (shifted.value === true) {
+    loop.next({duration: .05})
     gsap.to('.photo-carousel-v', {
       y: '100%',
       duration: .8, 
@@ -126,10 +119,12 @@ function left() {
   } else {
     loop.next({duration: .8, ease: "power3.inOut"})
   } 
+  tobiasStore.currentWork - 1 < 1 ? tobiasStore.currentWork = props.images.length : tobiasStore.currentWork = tobiasStore.currentWork - 1
 }
 
 function up() {
   if (shifted.value === false) {
+    loopV.next({duration: .05})
     gsap.to('.photo-carousel', {
       xPercent: 100,
       duration: .8, 
@@ -148,10 +143,12 @@ function up() {
   } else {
     loopV.next({duration: .8, ease: "power3.inOut"})
   }
+  tobiasStore.currentDiary + 1 > props.imagesV.length ? tobiasStore.currentDiary = 1 : tobiasStore.currentDiary++
 }
 
 function down() {
   if (shifted.value === false) {
+    loopV.previous({duration: .05})
     gsap.to('.photo-carousel', {
       xPercent: 100,
       duration: .8, 
@@ -170,6 +167,8 @@ function down() {
   } else {
     loopV.previous({duration: .8, ease: "power3.inOut"})
   }
+
+  tobiasStore.currentDiary - 1 < 1 ? tobiasStore.currentDiary = props.imagesV.length : tobiasStore.currentDiary = tobiasStore.currentDiary - 1
 }
 
 const props = defineProps({
@@ -187,7 +186,7 @@ const props = defineProps({
 <style lang="scss" scoped>
 .carousels {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - 1px);
   width: 100vw;
   overflow: hidden;
 }
@@ -236,7 +235,7 @@ const props = defineProps({
   grid-template-areas: 
     "l u u r"
     "l u u r"
-    "l . . r"
+    "l n n r"
     "l d d r"
     "l d d r"; 
   }
@@ -264,6 +263,10 @@ const props = defineProps({
     grid-area: d; 
     justify-content: center;
     align-items: flex-end;
+  }
+
+  .none { 
+    grid-area: n;
   }
 
   button {

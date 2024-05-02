@@ -23,8 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-nav {
-  text-transform: uppercase;
-
   &-primary {
     padding: 1em;
     display: flex;

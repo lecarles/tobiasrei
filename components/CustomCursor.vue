@@ -1,19 +1,45 @@
 <template>
   <div class="cursor" ref="cursor">
+    <div class="stamp stamp-up" v-if="tobiasStore.direction === 'up'">
+      <div>↑</div>
+      <div>Diary</div>
+      <div>({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</div>  
+    </div>
+    <div class="stamp stamp-down" v-else-if="tobiasStore.direction === 'down'">
+      <div>Diary</div>
+      <div>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</div>
+      <div>↓</div>
+    </div>
+    <div class="stamp stamp-right" v-else-if="tobiasStore.direction === 'right'">
+      <div>Work</div>
+      <div>({{ tobiasStore.currentWork + 1 > tobiasStore.workLength ? 1 : tobiasStore.currentWork + 1 }}/{{ tobiasStore.workLength }})</div>   
+      <div>→</div>
+    </div>
+    <div class="stamp stamp-left" v-else-if="tobiasStore.direction === 'left'">
+      <div>←</div>
+      <div>Work</div>
+      <div>({{ tobiasStore.currentWork - 1 === 0 ? tobiasStore.workLength : tobiasStore.currentWork - 1 }}/{{ tobiasStore.workLength }})</div>
+    </div>
+    <div class="stamp stamp-none-work" v-else-if="tobiasStore.direction === 'none-work'">
+      <div>Work</div>
+      <div>({{ tobiasStore.currentWork}}/{{ tobiasStore.workLength }})</div>
+    </div>
+    <div class="stamp stamp-none-diary" v-else-if="tobiasStore.direction === 'none-diary'">
+      <div>Work</div>
+      <div>({{ tobiasStore.currentDiary}}/{{ tobiasStore.diaryLength }})</div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { gsap } from 'gsap'
 import CustomEase from "gsap/CustomEase"
-import { onMounted, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
+import { onMounted, ref } from 'vue'
 import { useTobiasStore } from '@/stores/tobiasStore'
 
 const tobiasStore = useTobiasStore()
 
 const cursor = ref(null)
-const { cursorHover, cursorState } = storeToRefs(tobiasStore)
 
 let xSetter, ySetter
 let mouseX, mouseY
@@ -21,10 +47,6 @@ let hovering = false
 
 const props = defineProps({
   hover: String
-})
-
-watch(cursorHover, async (newHover, oldHover) => {
-  //wtch
 })
 
 onMounted(() => {
@@ -57,13 +79,20 @@ onMounted(() => {
 <style lang="scss" scoped>
 .cursor {
   position: fixed;
-  width: 1.8em;
-  height: 1.8em;
   top: 0;
   left: 0;
-  border: 1px solid black;
   pointer-events: none;
   z-index: 100;
-  border-radius: 100%;
+
+  .stamp {
+    display: flex;
+    line-height: 1;
+    gap: .25em;
+
+    &-up, &-down {
+      text-align: center;
+      flex-direction: column;
+    }
+  }
 }
 </style>
