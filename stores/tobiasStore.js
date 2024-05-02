@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia'
+import positions from '@/assets/photoPositions.json'
 
-export const useSergiStore = defineStore('sergiStore', {
+export const useTobiasStore = defineStore('tobiasStore', {
   state: () => { 
     return {
       windowSize: {x: 0, y: 0},
-      cursorState: 'home',
-      cursorHover: false,
-      dark: false
+      positions: positions
     } 
   },
   actions: {

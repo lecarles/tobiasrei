@@ -7,13 +7,13 @@
 import { gsap } from 'gsap'
 import CustomEase from "gsap/CustomEase"
 import { onMounted, ref, watch } from 'vue'
-import { useSergiStore } from '@/stores/sergiStore'
 import { storeToRefs } from 'pinia'
+import { useTobiasStore } from '@/stores/tobiasStore'
 
-const sergiStore = useSergiStore()
+const tobiasStore = useTobiasStore()
 
 const cursor = ref(null)
-const { cursorHover, cursorState } = storeToRefs(sergiStore)
+const { cursorHover, cursorState } = storeToRefs(tobiasStore)
 
 let xSetter, ySetter
 let mouseX, mouseY
@@ -33,8 +33,8 @@ onMounted(() => {
   xSetter = gsap.quickTo(cursor.value, "x", {duration: 0.6, ease: "power3"})
   ySetter = gsap.quickTo(cursor.value, "y", {duration: 0.6, ease: "power3"})
   gsap.set(cursor.value, {
-    x: sergiStore.windowSize.x/2,
-    y: sergiStore.windowSize.y/2
+    x: tobiasStore.windowSize.x/2,
+    y: tobiasStore.windowSize.y/2
   })
 
   document.addEventListener('mousemove', function (e) {
@@ -49,7 +49,7 @@ onMounted(() => {
 
   if(props.hover === 'right') {
     hovering = true
-    gsap.to(cursor.value, {x: sergiStore.windowSize.x, duration: 0.6, ease: "power3"})
+    gsap.to(cursor.value, {x: tobiasStore.windowSize.x, duration: 0.6, ease: "power3"})
   }
 })
 </script>

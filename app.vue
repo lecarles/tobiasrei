@@ -13,9 +13,9 @@ import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollSmoother from 'gsap/ScrollSmoother'
 import { onMounted, onUnmounted, ref } from 'vue'
-import { useSergiStore } from '@/stores/sergiStore'
+import { useTobiasStore } from '@/stores/tobiasStore'
 
-const sergiStore = useSergiStore()
+const tobiasStore = useTobiasStore()
 let ctx
 let smoother
 const main = ref(null)
@@ -40,7 +40,7 @@ onUnmounted(() => {
 })
 
 function onResize() {
-  sergiStore.setWindowSize({x: window.innerWidth,  y: window.innerHeight})
+  tobiasStore.setWindowSize({x: window.innerWidth,  y: window.innerHeight})
   let vh = window.innerHeight * 0.01
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }

@@ -2,20 +2,12 @@
   <div class="carousels">
     <div class="photo-carousel">
       <div ref="photos" class="photo-container" v-for="(photo, i) in props.images" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="" :style="{
-          gridColumn: arr[i].gridColumn,
-          gridRow: arr[i].gridRow,
-          objectPosition: arr[i].objectPosition
-        }">
+        <photo-item :image="photo.filename" />
       </div>
     </div>
     <div class="photo-carousel-v">
       <div ref="photosV" class="photo-container" v-for="(photo, i) in props.imagesV" :key="photo.id" @click="to(i)">
-        <img :src="photo.filename + '/m/1400x0'" alt="" :style="{
-          gridColumn: arr[i+40].gridColumn,
-          gridRow: arr[i+40].gridRow,
-          objectPosition: arr[i+40].objectPosition
-        }">
+        <photo-item :image="photo.filename" />
       </div>
     </div>
     <div class="controls font-size-sm">
@@ -37,6 +29,9 @@ import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import CustomEase from "gsap/CustomEase"
 import horizontalLoop from '@/helpers/horizontalLoop'
 import verticalLoop from '@/helpers/verticalLoop'
+import { useTobiasStore } from '@/stores/tobiasStore'
+
+const tobiasStore = useTobiasStore()
 
 let observer
 
@@ -83,34 +78,6 @@ function setupLoop() {
 
 function to(i) {
   loop.toIndex(i, {duration: .8, ease: "power3.inOut"})
-}
-
-  let arr = []
-  let positionsX = ['left', 'right'] 
-  let positionsY = ['top', 'bottom']
-  let sizes = [2, 3, 4]
-  let positions = [1, 2, 3, 4]
-
-
-for(let i = 0; i < 80; i++) {
-  let colSize = sizes[Math.floor(Math.random() * sizes.length)]
-  let colPosition = positions[Math.floor(Math.random() * positions.length)]
-  let rowSize = sizes[Math.floor(Math.random() * sizes.length)]
-  let rowPosition = positions[Math.floor(Math.random() * positions.length)]
-
-  if (colPosition + colSize > 6) {
-    colPosition = 6 - colSize
-  }
-
-  if (rowPosition + rowSize > 6) {
-    rowPosition = 6 - rowSize
-  }
-
-  arr.push({
-    objectPosition: `${positionsX[Math.floor(Math.random() * positionsX.length)]} ${positionsY[Math.floor(Math.random() * positionsY.length)]}`,
-    gridColumn: `${colPosition} / span ${colSize}`,
-    gridRow: `${rowPosition} / span ${rowSize}`,
-  })
 }
 
 function toV(i) {
