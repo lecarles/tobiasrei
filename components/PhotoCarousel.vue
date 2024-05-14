@@ -11,11 +11,13 @@
       </div>
     </div>
     <div class="controls font-size-sm">
-      <button @mouseenter="handlemouse('left')" class="left" @click="left()"></button>
-      <button @mouseenter="handlemouse('right')" class="right" @click="right()"></button>
-      <button @mouseenter="handlemouse('up')" class="up" @click="up()"></button>
-      <button @mouseenter="handlemouse('down')" class="down" @click="down()"></button>
-      <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div>
+      <button @mouseover="handlemouse('left')" class="left" @click="left()"></button>
+      <button @mouseover="handlemouse('right')" class="right" @click="right()"></button>
+      <button @mouseover="handlemouse('up')" class="up" @click="up()"></button>
+      <button @mouseover="handlemouse('down')" class="down" @click="down()"></button>
+      <button @mouseover="handlemouse('right')" class="rr" @click="right()"></button>
+      <button @mouseover="handlemouse('left')" class="ll" @click="left()"></button>
+      <!-- <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div> -->
     </div>
     <custom-cursor />
   </div>
@@ -191,6 +193,10 @@ const props = defineProps({
   overflow: hidden;
 }
 
+button {
+  cursor: none;
+}
+
 .photo-carousel, .photo-carousel-v {
   position: absolute;
   inset: 0;
@@ -235,7 +241,7 @@ const props = defineProps({
   grid-template-areas: 
     "l u u r"
     "l u u r"
-    "l n n r"
+    "l ll rr r"
     "l d d r"
     "l d d r"; 
   }
@@ -263,6 +269,12 @@ const props = defineProps({
     grid-area: d; 
     justify-content: center;
     align-items: flex-end;
+  }
+  .ll {
+    grid-area: ll;
+  }
+  .rr {
+    grid-area: rr;
   }
 
   .none { 

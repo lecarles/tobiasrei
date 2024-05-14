@@ -1,8 +1,8 @@
 <template>
   <img :src="image + '/m/1400x0'" alt="" :style="{
-    gridColumn: tobiasStore.positions[photoIndex].gridColumn,
-    gridRow: tobiasStore.positions[photoIndex].gridRow,
-    objectPosition: tobiasStore.positions[photoIndex].objectPosition
+    gridColumn: tobiasStore.isMb ? tobiasStore.positionsMb[photoIndex].gridColumn : tobiasStore.positions[photoIndex].gridColumn,
+    gridRow: tobiasStore.isMb ? tobiasStore.positionsMb[photoIndex].gridRow : tobiasStore.positions[photoIndex].gridRow,
+    objectPosition: tobiasStore.isMb ? tobiasStore.positionsMb[photoIndex].objectPosition : tobiasStore.positions[photoIndex].objectPosition
   }">
 </template>
 

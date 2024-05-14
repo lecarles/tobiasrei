@@ -26,7 +26,10 @@
     </div>
     <div class="stamp stamp-none-diary" v-else-if="tobiasStore.direction === 'none-diary'">
       <div>Work</div>
-      <div>({{ tobiasStore.currentDiary}}/{{ tobiasStore.diaryLength }})</div>
+      <div>({{ tobiasStore.currentDiary }}/{{ tobiasStore.diaryLength }})</div>
+    </div>
+    <div class="stamp stamp-nav" v-else-if="tobiasStore.direction === 'nav'">
+
     </div>
   </div>
 </template>
