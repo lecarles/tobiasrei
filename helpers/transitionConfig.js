@@ -3,7 +3,6 @@ import CustomEase from "gsap/CustomEase"
 
 import { useTransitionComposable } from '~/composables/transitionComposable'
 
-let mm = gsap.matchMedia()
 const { toggleTransitionComplete } = useTransitionComposable()
 
 const pageTransition = {

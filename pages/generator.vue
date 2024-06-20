@@ -10,7 +10,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 let photoPositions = ref([])
 let positionsX = ['left', 'right'] 
 let positionsY = ['top', 'bottom']
-let sizes = [4, 5, 6]
+let sizes = [4, 5]
 let positions = [1, 2, 3, 4]
 
 function getRandomInt(max) {
@@ -23,10 +23,6 @@ onMounted(() => {
     let colPosition = positions[Math.floor(Math.random() * positions.length)]
     let rowSize = sizes[Math.floor(Math.random() * sizes.length)]
     let rowPosition = positions[Math.floor(Math.random() * positions.length)]
-
-    /* if (colSize === 2 && rowSize === 2) {
-      getRandomInt(2) === 0 ? colSize = 3 : rowSize = 3
-    } */
 
     if (colPosition + colSize > 6) {
       colPosition = 6 - colSize

@@ -1,0 +1,40 @@
+.slide-enter-active,
+.slide-leave-active {
+  transition: all .35s ease;
+  max-height: 800px;
+  overflow: hidden;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all .35s ease;
+  max-height: 0;
+  overflow: hidden;
+}
+
+//pan
+
+.pan-enter-active,
+.pan-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.pan-enter-from,
+.pan-leave-to {
+  opacity: 0;
+}
+
+//key
+
+.key-enter-active,
+.key-leave-active {
+  transition: all 0.2s ease;
+}
+
+.key-enter-from,
+.key-leave-to {
+  transform: translateY(5px);
+  opacity: 0;
+}

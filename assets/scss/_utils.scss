@@ -88,8 +88,16 @@
   margin-left: $col-gap;
 }
 
-.mr-col {
-  margin-right: $col-gap;
+.ml-col-2 {
+  margin-left: calc($row-gap * 2);
+}
+
+.ml-col-4 {
+  margin-left: calc($row-gap * 4);
+}
+
+.mr-col-6 {
+  margin-right: calc($row-gap * 6);
 }
 
 .m-auto {

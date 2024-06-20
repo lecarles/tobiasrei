@@ -32,6 +32,7 @@ import CustomEase from "gsap/CustomEase"
 import horizontalLoop from '@/helpers/horizontalLoop'
 import verticalLoop from '@/helpers/verticalLoop'
 import { useTobiasStore } from '@/stores/tobiasStore'
+import positions from '@/assets/photoPositions.json'
 
 const tobiasStore = useTobiasStore()
 const photos = ref(null)
@@ -204,17 +205,16 @@ button {
   overflow: hidden;
 
   .photo-container {
+    height: 100vh;
+    width: 100vw;
     display: grid;
-    grid-template-columns: repeat(5, 20vw);
-    grid-template-rows: repeat(5, 20vh);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    padding: 6rem 2rem;
     position: relative;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
   }
 }
 

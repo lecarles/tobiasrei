@@ -1,14 +1,15 @@
 <template>
   <div class="cursor" ref="cursor">
-    <div class="stamp stamp-up" v-if="tobiasStore.direction === 'up'">
+    <div class="stamp stamp-up font-family-mono" v-if="tobiasStore.direction === 'up'">
       <div>↑</div>
-      <div>Diary</div>
-      <div>({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</div>  
+      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">Diary ({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</div>
     </div>
-    <div class="stamp stamp-down" v-else-if="tobiasStore.direction === 'down'">
-      <div>Diary</div>
-      <div>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</div>
-      <div>↓</div>
+    <div class="stamp stamp-down font-family-mono" v-else-if="tobiasStore.direction === 'down'">
+      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">
+        <span class="underline">Diary</span> 
+        <span>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</span>
+        <span class="mr-1 ml-1">↓</span>
+      </div>
     </div>
     <div class="stamp stamp-right" v-else-if="tobiasStore.direction === 'right'">
       <div>Work</div>
@@ -41,6 +42,11 @@ import { onMounted, ref } from 'vue'
 import { useTobiasStore } from '@/stores/tobiasStore'
 
 const tobiasStore = useTobiasStore()
+const rotations = [2.6, 1.8, 0.8, -1.4, -2, -2.6]
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 const cursor = ref(null)
 
@@ -90,7 +96,7 @@ onMounted(() => {
   .stamp {
     display: flex;
     line-height: 1;
-    gap: .25em;
+    gap: .2em;
 
     &-up, &-down {
       text-align: center;

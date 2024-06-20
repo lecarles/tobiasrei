@@ -31,10 +31,17 @@ html {
 .font-size-sm {
   font-family: $font-family-sans;
   font-size: $font-size-sm;
-  line-height: 1.4;
+  line-height: 1.05;
   font-weight: $font-weight;
   margin: 0;
   letter-spacing: -0.005em;
+}
+
+.font-family-mono {
+  font-family: $font-family-mono;
+  font-size: calc($font-size-sm * 1.05);
+  text-transform: uppercase;
+  margin-top: .2em;
 }
 
 a {
