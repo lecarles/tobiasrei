@@ -1,20 +1,22 @@
 <template>
-  <img :src="image + '/m/1400x0'" alt="" :style="{
-    gridColumn: props.isMb ? tobiasStore.positionsMb[photoIndex].gridColumn : tobiasStore.positions[photoIndex].gridColumn,
-    gridRow: props.isMb ? tobiasStore.positionsMb[photoIndex].gridRow : tobiasStore.positions[photoIndex].gridRow,
-    objectPosition: props.isMb ? tobiasStore.positionsMb[photoIndex].objectPosition : tobiasStore.positions[photoIndex].objectPosition
-  }">
+  <img :src="image + '/m/1400x0'" alt="" ref="img">
 </template>
 
 <script setup>
+import gsap from 'gsap'
 import { useTobiasStore } from '@/stores/tobiasStore'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue'
 
 const tobiasStore = useTobiasStore()
-let photoIndex = Math.floor(Math.random() * 80)
+let photoIndex = ref(Math.floor(Math.random() * 80))
+const img = ref(null)
 
 onMounted(() => {
-  photoIndex = Math.floor(Math.random() * 80)
+  gsap.set(img.value, {
+    gridColumn: props.isMb ? tobiasStore.positionsMb[photoIndex.value].gridColumn : tobiasStore.positions[photoIndex.value].gridColumn,
+    gridRow: props.isMb ? tobiasStore.positionsMb[photoIndex.value].gridRow : tobiasStore.positions[photoIndex.value].gridRow,
+    objectPosition: props.isMb ? tobiasStore.positionsMb[photoIndex.value].objectPosition : tobiasStore.positions[photoIndex.value].objectPosition
+  })
 })
 
 const props = defineProps({

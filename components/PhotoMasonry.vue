@@ -1,16 +1,16 @@
 <template>
   <div class="photo-masonry">
       <div class="masonry-grid">
-        <div class="masonry-grid-item" v-for="(image, i) in props.images" :key="image.filename">
-          <div class="no">{{ i + 1 }}</div>
-          <img :src="image.filename + '/m/400x0'">
-        </div>
+        <button class="masonry-grid-item" @click="$emit('masonryWork', i)" v-for="(image, i) in props.images" :key="image.filename">
+          <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
+          <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
+        </button>
       </div>
       <div class="masonry-grid font-family-mono">
-        <div class="masonry-grid-item" v-for="(image, i) in props.imagesV" :key="image.filename">
-          <div class="no">{{ i + 1 }}</div>
-          <img :src="image.filename + '/m/400x0'">
-        </div>
+        <button class="masonry-grid-item" @click="$emit('masonryDiary', i)" v-for="(image, i) in props.imagesV" :key="image.filename">
+          <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
+          <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
+        </button>
       </div>
   </div>
 </template>
@@ -43,7 +43,6 @@ const props = defineProps({
   z-index: 10;
   padding-top: 7em;
   font-size: .8em;
-  background: white;
   height: 100%;
   overflow: auto;
 
@@ -67,14 +66,25 @@ const props = defineProps({
   }
 
   &-item {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
     width: auto;
     position: relative;
+    padding: 0;
+    margin: 0;
   }
 
-  .no {
+  .masonry-no {
     top: -1.5em;
     left: .35em;
     position: absolute;
+    overflow: hidden;
   }
 
   img {
@@ -85,5 +95,9 @@ const props = defineProps({
     max-width: max-content;
     max-height: 20vh;
   }
+}
+
+.masonry-img-wrapper {
+  overflow: hidden;  
 }
 </style>

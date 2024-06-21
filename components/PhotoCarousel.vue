@@ -70,11 +70,32 @@ function setupLoop() {
 }
 
 function to(i) {
-  loop.toIndex(i, {duration: .8, ease: "power3.inOut"})
+  if (shifted.value === true) {
+    gsap.set('.photo-carousel-v', {
+      y: '100%',
+    })
+    gsap.set('.photo-carousel', {
+      xPercent: 0
+    })
+    shifted.value = !shifted.value
+  }
+  loop.toIndex(i, {duration: 0})
+  tobiasStore.currentWork = i + 1
 }
 
 function toV(i) {
-  loopV.toIndex(i, {duration: .8, ease: "power3.inOut"})
+  if (shifted.value === false) {
+    gsap.set('.photo-carousel', {
+      xPercent: 100,
+    })
+    gsap.to('.photo-carousel-v', {
+      y: 0,
+      duration: 0.05
+    })
+    shifted.value = !shifted.value
+  }
+  loopV.toIndex(i, {duration: 0.01})
+  tobiasStore.currentDiary = i + 1
 }
 
 function right() {
@@ -173,6 +194,11 @@ function down() {
 
   tobiasStore.currentDiary - 1 < 1 ? tobiasStore.currentDiary = props.imagesV.length : tobiasStore.currentDiary = tobiasStore.currentDiary - 1
 }
+
+defineExpose({
+  to,
+  toV
+})
 
 const props = defineProps({
   images: {

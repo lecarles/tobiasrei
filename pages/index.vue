@@ -16,7 +16,8 @@ const work = await storyblokApi.get('cdn/stories/work')
 const diary = await storyblokApi.get('cdn/stories/diary')
 let images = work.data.story.content.images
 let mobile = ref(false)
-let menuOpen = ref(false)
+const navRef = ref(null)
+const carouselRef = ref(null)
 
 images.reverse()
 images.unshift(images.pop())
@@ -54,14 +55,24 @@ function shuffleArray(array) {
   }
 }
 
+function workTo(i) {
+  carouselRef.value.to(i)
+  navRef.value.toggleMasonry()
+}
+
+function diaryTo(i) {
+  carouselRef.value.toV(i)
+  navRef.value.toggleMasonry()
+}
+
 </script>
 
 <template>
   <div class="main-page font-size-sm">
-    <app-nav />
+    <app-nav ref="navRef"></app-nav>
     <photo-carousel-mb :images="imagesMb" v-if="mobile"/>
-    <photo-carousel :images="images" :imagesV="diary.data.story.content.images" v-else/>
-    <photo-masonry :images="images" :imagesV="diary.data.story.content.images" />
+    <photo-carousel ref="carouselRef" :images="images" :imagesV="diary.data.story.content.images" v-else/>
+    <photo-masonry :images="images" :imagesV="diary.data.story.content.images" @masonry-work="workTo" @masonry-diary="diaryTo" />
   </div>
 </template>
 

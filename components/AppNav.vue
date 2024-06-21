@@ -11,9 +11,28 @@
 <script setup>
 import gsap from 'gsap'
 import { useTobiasStore } from '@/stores/tobiasStore'
-const tobiasStore = useTobiasStore()
+import { ref, onMounted } from 'vue'
 
-const rotations = [2.6, 1.8, 1.1, -1.6, -2.1, -2.7]
+const tobiasStore = useTobiasStore()
+const rotations = ref([2.6, 1.8, 1.1, -1.6, -2.1, -2.7])
+let masTl = gsap.timeline({paused: true})
+let showMasonry = ref(false)
+
+onMounted(() => {
+  masTl.set('.photo-masonry', {display: 'block'})
+  masTl.set('.masonry-img', {yPercent: 150})
+  masTl.set('.masonry-no-child', { yPercent: 100 })
+  masTl.set('.carousels', { yPercent: 0 })
+  masTl.to('.carousels', {yPercent: -120, duration: 1, ease: 'power4.out'})
+  masTl.to('.masonry-img', {yPercent: 0, duration: 1, stagger: 0.02, ease: 'power4.out'}, '<0.25')
+  masTl.to('.masonry-no-child', {yPercent: 0, duration: .5, stagger: 0.02, ease: 'power4.out'}, '<0.5')
+  masTl.addLabel('show')
+  masTl.set('.carousels', { yPercent: 120 })
+  masTl.to('.masonry-no-child', {yPercent: -100, duration: .4, stagger: 0.012, ease: 'power4.out'})
+  masTl.to('.masonry-img', {yPercent: -150, duration: 1, stagger: 0.02, ease: 'power4'}, '<0.1')
+  masTl.to('.carousels', {yPercent: 0, duration: 1, ease: 'power4.out'}, '<0.5')
+  masTl.set('.photo-masonry', {display: 'none'})
+})
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -24,8 +43,13 @@ function handleMouse() {
 }
 
 function toggleMasonry() {
-  gsap.set('.photo-masonry', {display: 'block'})
+  showMasonry.value ? masTl.tweenFromTo('show', masTl.duration()) : masTl.tweenFromTo(0, 'show')
+  showMasonry.value = !showMasonry.value
 }
+
+defineExpose({
+  toggleMasonry
+})
 </script>
 
 <style lang="scss" scoped>
