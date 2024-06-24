@@ -6,7 +6,7 @@
       </div>
     </div>
     <transition mode="out-in" name="key">
-      <div :key="activeIndex" class="position-indicator">
+      <div :key="activeIndex" :class="['position-indicator', `position-indicator-${props.images[activeIndex].category}`]">
         {{ cap(props.images[activeIndex].category) }}
         ({{ props.images[activeIndex].order }} / 24)
       </div>
@@ -82,6 +82,11 @@ function setupLoop() {
   padding: $padding-x-md;
   bottom: 0;
   z-index: 10000;
+
+  &-diary {
+    font-family: $font-family-mono;
+    text-transform: uppercase;
+  }
 }
 
 .photo-carousel-mb {

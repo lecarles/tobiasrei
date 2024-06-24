@@ -1,13 +1,13 @@
 <template>
   <div class="photo-masonry">
-      <div class="masonry-grid">
-        <button class="masonry-grid-item" @click="$emit('masonryWork', i)" v-for="(image, i) in props.images" :key="image.filename">
+      <div class="masonry-grid masonry-grid-work">
+        <button :class="['masonry-grid-item', `work-${i}`]" @mouseenter="handleEnter(`work-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryWork', i)" v-for="(image, i) in props.images" :key="image.filename">
           <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
       </div>
-      <div class="masonry-grid font-family-mono">
-        <button class="masonry-grid-item" @click="$emit('masonryDiary', i)" v-for="(image, i) in props.imagesV" :key="image.filename">
+      <div class="masonry-grid masonry-grid-diary font-family-mono">
+        <button :class="['masonry-grid-item', `diary-${i}`]" @mouseenter="handleEnter(`diary-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryDiary', i)" v-for="(image, i) in props.imagesV" :key="image.filename">
           <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
@@ -33,6 +33,16 @@ const props = defineProps({
     default: null
   }
 })
+
+function handleEnter(id) {
+  console.log('he')
+  gsap.to('.masonry-grid-item', {opacity: 0.4, duration: 0.4})
+  gsap.to(`.${id}`, {opacity: 1, duration: 0.4}, '<')
+}
+
+function handleLeave() {
+  gsap.to('.masonry-grid-item', {opacity: 1, duration: 0.4})
+}
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +54,6 @@ const props = defineProps({
   padding-top: 7em;
   font-size: .8em;
   height: 100%;
-  overflow: auto;
 
   .masonry-grid {
     font-size: .92em;
@@ -65,6 +74,10 @@ const props = defineProps({
   flex: auto;
   }
 
+  &-diary {
+    padding-top: 6em;
+  }
+
   &-item {
     font-family: inherit;
     font-weight: inherit;
@@ -78,6 +91,7 @@ const props = defineProps({
     position: relative;
     padding: 0;
     margin: 0;
+    cursor: pointer;
   }
 
   .masonry-no {

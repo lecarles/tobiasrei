@@ -1,25 +1,27 @@
 <template>
-  <div class="carousels">
-    <div class="photo-carousel">
-      <div ref="photos" class="photo-container" v-for="photo in props.images" :key="photo.id">
-        <photo-item :image="photo.filename" />
+  <div class="carousels-wrap">
+    <div class="carousels">
+      <div class="photo-carousel">
+        <div ref="photos" class="photo-container" v-for="photo in props.images" :key="photo.id">
+          <photo-item :image="photo.filename" />
+        </div>
       </div>
-    </div>
-    <div class="photo-carousel-v">
-      <div ref="photosV" class="photo-container" v-for="photo in props.imagesV" :key="photo.id">
-        <photo-item :image="photo.filename" />
+      <div class="photo-carousel-v">
+        <div ref="photosV" class="photo-container" v-for="photo in props.imagesV" :key="photo.id">
+          <photo-item :image="photo.filename" />
+        </div>
       </div>
+      <div class="controls font-size-sm">
+        <button @mouseover="handlemouse('left')" class="left" @click="left()"></button>
+        <button @mouseover="handlemouse('right')" class="right" @click="right()"></button>
+        <button @mouseover="handlemouse('up')" class="up" @click="up()"></button>
+        <button @mouseover="handlemouse('down')" class="down" @click="down()"></button>
+        <button @mouseover="handlemouse('right')" class="rr" @click="right()"></button>
+        <button @mouseover="handlemouse('left')" class="ll" @click="left()"></button>
+        <!-- <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div> -->
+      </div>
+      <custom-cursor />
     </div>
-    <div class="controls font-size-sm">
-      <button @mouseover="handlemouse('left')" class="left" @click="left()"></button>
-      <button @mouseover="handlemouse('right')" class="right" @click="right()"></button>
-      <button @mouseover="handlemouse('up')" class="up" @click="up()"></button>
-      <button @mouseover="handlemouse('down')" class="down" @click="down()"></button>
-      <button @mouseover="handlemouse('right')" class="rr" @click="right()"></button>
-      <button @mouseover="handlemouse('left')" class="ll" @click="left()"></button>
-      <!-- <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div> -->
-    </div>
-    <custom-cursor />
   </div>
 </template>
 
@@ -218,6 +220,10 @@ const props = defineProps({
   height: calc(100vh - 1px);
   width: 100vw;
   overflow: hidden;
+
+  &-wrap {
+    overflow: hidden;
+  }
 }
 
 button {

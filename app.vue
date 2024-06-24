@@ -1,17 +1,12 @@
 <template>
   <div>
-    <div id="smooth-wrapper" ref="main">
-      <div id="smooth-content">
-        <NuxtPage />
-      </div>
-    </div>
+    <NuxtPage />
   </div>
 </template>
 
 <script setup>
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import ScrollSmoother from 'gsap/ScrollSmoother'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useTobiasStore } from '@/stores/tobiasStore'
 
@@ -22,14 +17,7 @@ const main = ref(null)
 
 
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother)  
-
-  ctx = gsap.context(() => {
-    smoother = ScrollSmoother.create({
-      smooth: 1, 
-      effects: true,
-    })
-  }, main.value)
+  gsap.registerPlugin(ScrollTrigger)  
 
   onResize()
   window.addEventListener('resize', onResize)

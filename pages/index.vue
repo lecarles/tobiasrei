@@ -41,13 +41,6 @@ let imgv = diary.data.story.content.images.map((img, i) => {
 let imagesMb = imgh.concat(imgv)
 shuffleArray(imagesMb)
 
-onMounted(() => {
-  let mm = gsap.matchMedia()
-  mm.add("(max-width: 900px)", () => {
-    mobile.value = true
-  })
-})
-
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -70,8 +63,8 @@ function diaryTo(i) {
 <template>
   <div class="main-page font-size-sm">
     <app-nav ref="navRef"></app-nav>
-    <photo-carousel-mb :images="imagesMb" v-if="mobile"/>
-    <photo-carousel ref="carouselRef" :images="images" :imagesV="diary.data.story.content.images" v-else/>
+    <photo-carousel-mb :images="imagesMb" />
+    <photo-carousel ref="carouselRef" :images="images" :imagesV="diary.data.story.content.images" />
     <photo-masonry :images="images" :imagesV="diary.data.story.content.images" @masonry-work="workTo" @masonry-diary="diaryTo" />
   </div>
 </template>
@@ -87,5 +80,19 @@ function diaryTo(i) {
 
 .intro-text {
   text-wrap: balance;
+}
+
+.carousel-mb {
+  display: none;
+}
+
+@media (max-width: $sm-breakpoint) {
+  .carousels-wrap {
+    display: none;
+  }
+
+  .carousel-mb {
+    display: block;
+  }
 }
 </style>
