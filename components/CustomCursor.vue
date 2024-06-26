@@ -1,14 +1,17 @@
 <template>
   <div class="cursor" ref="cursor">
-    <div class="stamp stamp-up font-family-mono" v-if="tobiasStore.direction === 'up'">
-      <div>↑</div>
-      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">Diary ({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</div>
-    </div>
-    <div class="stamp stamp-down font-family-mono" v-else-if="tobiasStore.direction === 'down'">
+    <div class="stamp stamp-up font-size-sm-mono" v-if="tobiasStore.direction === 'up'">
       <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">
-        <span class="underline">Diary</span> 
-        <span>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</span>
+        <span>Diary</span> 
+        <span class="mr-1 ml-1">↑</span>
+        <span>({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</span>
+      </div>
+    </div>
+    <div class="stamp stamp-down font-size-sm-mono" v-else-if="tobiasStore.direction === 'down'">
+      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">
+        <span>Diary</span> 
         <span class="mr-1 ml-1">↓</span>
+        <span>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</span>
       </div>
     </div>
     <div class="stamp stamp-right" v-else-if="tobiasStore.direction === 'right'">
@@ -20,14 +23,6 @@
       <div>←</div>
       <div>Work</div>
       <div>({{ tobiasStore.currentWork - 1 === 0 ? tobiasStore.workLength : tobiasStore.currentWork - 1 }}/{{ tobiasStore.workLength }})</div>
-    </div>
-    <div class="stamp stamp-none-work" v-else-if="tobiasStore.direction === 'none-work'">
-      <div>Work</div>
-      <div>({{ tobiasStore.currentWork}}/{{ tobiasStore.workLength }})</div>
-    </div>
-    <div class="stamp stamp-none-diary" v-else-if="tobiasStore.direction === 'none-diary'">
-      <div>Work</div>
-      <div>({{ tobiasStore.currentDiary }}/{{ tobiasStore.diaryLength }})</div>
     </div>
     <div class="stamp stamp-nav" v-else-if="tobiasStore.direction === 'nav'">
 

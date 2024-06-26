@@ -37,10 +37,35 @@ html {
   letter-spacing: -0.005em;
 }
 
+.font-size-xs {
+  font-family: $font-family-sans;
+  font-size: $font-size-xs;
+  line-height: 1.05;
+  font-weight: $font-weight;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+
+.font-size-sm-mono {
+  font-family: $font-family-mono;
+  font-size: calc($font-size-sm * 1.08);
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.font-size-xs-mono {
+  font-family: $font-family-mono;
+  font-size: calc($font-size-xs * 1.1);
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1;
+}
+
 .font-family-mono {
   font-family: $font-family-mono;
   text-transform: uppercase;
-  margin-top: .2em;
+  font-weight: 400;
 }
 
 a {

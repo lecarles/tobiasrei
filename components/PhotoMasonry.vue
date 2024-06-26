@@ -1,14 +1,14 @@
 <template>
   <div class="photo-masonry">
-      <div class="masonry-grid masonry-grid-work">
+      <div class="masonry-grid masonry-grid-work font-size-xs">
         <button :class="['masonry-grid-item', `work-${i}`]" @mouseenter="handleEnter(`work-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryWork', i)" v-for="(image, i) in props.images" :key="image.filename">
-          <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
+          <div class="masonry-no"><div class="masonry-no-child">({{ i + 1 }})</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
       </div>
-      <div class="masonry-grid masonry-grid-diary font-family-mono">
+      <div class="masonry-grid masonry-grid-diary font-size-xs-mono">
         <button :class="['masonry-grid-item', `diary-${i}`]" @mouseenter="handleEnter(`diary-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryDiary', i)" v-for="(image, i) in props.imagesV" :key="image.filename">
-          <div class="masonry-no"><div class="masonry-no-child">{{ i + 1 }}</div></div>
+          <div class="masonry-no"><div class="masonry-no-child">({{ i + 1 }})</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
       </div>
@@ -35,7 +35,6 @@ const props = defineProps({
 })
 
 function handleEnter(id) {
-  console.log('he')
   gsap.to('.masonry-grid-item', {opacity: 0.4, duration: 0.4})
   gsap.to(`.${id}`, {opacity: 1, duration: 0.4}, '<')
 }
@@ -52,12 +51,7 @@ function handleLeave() {
   width: 100%;
   z-index: 10;
   padding-top: 7em;
-  font-size: .8em;
   height: 100%;
-
-  .masonry-grid {
-    font-size: .92em;
-  }
 }
 
 .masonry-grid {

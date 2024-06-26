@@ -1,8 +1,19 @@
 @font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/ApfelGrotezk-Regular.woff2") format("woff2");
-  src: url("../fonts/ApfelGrotezk-Regular.woff") format("woff");
+  font-family: "Saans";
+  src: url("../fonts/SaansTRIAL-Medium.woff2") format("woff2"),
+      url("../fonts/SaansTRIAL-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: "Saans";
+  src: url("../fonts/SaansTRIAL-SemiBold.woff2") format("woff2"),
+      url("../fonts/SaansTRIAL-SemiBold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
 
 @font-face {
   font-family: 'latin_modern_mono10_regular';

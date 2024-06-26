@@ -1,8 +1,8 @@
 <template>
   <div class="app-nav font-size-sm" @mouseenter="handleMouse()">
     <div class="app-nav-primary">
-      <div class="ml-col-2"><span>Tobias Rei</span>, <br>photographer based in Barcelona</div>
-      <div class="font-family-mono underline" :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}"><a class="mr-1" href="mailto:hi@tobiasrei.com">hi@tobiasrei.com</a><a href="https://instagram.com/tobias.rei">@tobias.rei</a></div>
+      <div class="tobias-rei"><span>Tobias Rei</span>, photographer based in Barcelona</div>
+      <div class="font-size-sm-mono underline" :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}"><a class="mr-1" href="mailto:hi@tobiasrei.com">hi@tobiasrei.com</a><a href="https://instagram.com/tobias.rei">@tobias.rei</a></div>
     </div>
     <div class="app-nav app-nav-show-all">
       <button class="toggle-btn" @click="toggleMasonry()">
@@ -66,6 +66,11 @@ defineExpose({
 .app-nav {
   z-index: 100;
   position: relative;
+
+  .tobias-rei {
+    max-width: 20ch;
+    margin-bottom: .5em;
+  }
 
   .toggle-btn {
     height: 1.2em;
