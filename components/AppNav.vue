@@ -28,6 +28,11 @@ onMounted(() => {
     rotation: rotations.value[getRandomInt(5)]
   })
 
+  gsap.to('.app-nav', {
+    duration: .65,
+    opacity: 1
+  })
+
   masTl.set('.photo-masonry', {display: 'block'})
   masTl.set('.masonry-img', {yPercent: 150})
   masTl.set('.masonry-no-child', { yPercent: 110 })
@@ -70,6 +75,7 @@ defineExpose({
 .app-nav {
   z-index: 100;
   position: relative;
+  opacity: 0;
 
   .tobias-rei {
     max-width: 20ch;

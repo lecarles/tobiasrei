@@ -17,6 +17,11 @@ onMounted(() => {
     gridRow: props.isMb ? tobiasStore.positionsMb[photoIndex.value].gridRow : tobiasStore.positions[photoIndex.value].gridRow,
     objectPosition: props.isMb ? tobiasStore.positionsMb[photoIndex.value].objectPosition : tobiasStore.positions[photoIndex.value].objectPosition
   })
+
+  gsap.to(img.value, {
+    duration: .5,
+    opacity: 1
+  })
 })
 
 const props = defineProps({
@@ -33,5 +38,6 @@ img {
   object-fit: contain;
   height: 100%;
   width: 100%;
+  opacity: 0;
 }
 </style>

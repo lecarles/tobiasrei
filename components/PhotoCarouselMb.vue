@@ -52,6 +52,11 @@ onMounted(() => {
   gsap.registerPlugin(InertiaPlugin)
   gsap.registerPlugin(CustomEase)
 
+  gsap.to('.position-indicator', {
+    duration: .5,
+    opacity: 1
+  })
+
   setupLoop()
 })
 
@@ -81,6 +86,7 @@ function setupLoop() {
   padding: $padding-x-md;
   bottom: 0;
   z-index: 10000;
+  opacity: 0;
 
   &-diary {
     font-weight: 400;
