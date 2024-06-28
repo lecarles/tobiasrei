@@ -47,9 +47,9 @@ onMounted(() => {
   masTl.set('.carousels', { yPercent: 120 })
   masTl.to('.toggle-btn-single', {yPercent: -110, duration: .65, ease: 'power4.out'})
   masTl.to('.masonry-no-child', {yPercent: -100, duration: .4, stagger: 0.012, ease: 'power4.out'}, '<0.1')
-  masTl.to('.masonry-img', {yPercent: -120, duration: .7, stagger: 0.01, ease: 'power4'}, '<0.1')
-  masTl.to('.carousels', {yPercent: 0, duration: .9, ease: 'power4.out'}, '<0.8')
-  masTl.set('.photo-masonry', {display: 'none'})
+  masTl.to('.masonry-img', {yPercent: -120, duration: .65, stagger: 0.01, ease: 'power4'}, '<0.1')
+  masTl.to('.carousels', {yPercent: 0, duration: .9, ease: 'power4.out'}, '>')
+  masTl.set('.photo-masonry', {display: 'none'}, '<')
   masTl.to('.toggle-btn-all', {yPercent: 0, duration: .65, stagger: 0.02, ease: 'power4.out'}, '<0.1')
 })
 
