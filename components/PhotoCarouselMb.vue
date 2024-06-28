@@ -5,12 +5,14 @@
         <photo-item :image="photo.filename" isMb/>
       </div>
     </div>
-    <transition mode="out-in" name="key">
-      <div :key="activeIndex" :class="['position-indicator', `position-indicator-${props.images[activeIndex].category}`]">
-        {{ cap(props.images[activeIndex].category) }}
-        ({{ props.images[activeIndex].order }} / 24)
-      </div>
-    </transition>
+    <div class="pos-container">
+      <transition mode="out-in" name="key">
+        <div :key="activeIndex" :class="['position-indicator', `position-indicator-${props.images[activeIndex].category}`]">
+          {{ cap(props.images[activeIndex].category) }}
+          ({{ props.images[activeIndex].order }} / 24)
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -52,7 +54,7 @@ onMounted(() => {
   gsap.registerPlugin(InertiaPlugin)
   gsap.registerPlugin(CustomEase)
 
-  gsap.to('.position-indicator', {
+  gsap.to('.pos-container', {
     duration: .5,
     opacity: 1
   })
@@ -76,6 +78,11 @@ function setupLoop() {
   position: relative;
 }
 
+.pos-container {
+  opacity: 0;
+}
+
+
 .position-indicator {
   position: fixed;
   display: flex;
@@ -86,7 +93,6 @@ function setupLoop() {
   padding: $padding-x-md;
   bottom: 0;
   z-index: 10000;
-  opacity: 0;
 
   &-diary {
     font-weight: 400;
