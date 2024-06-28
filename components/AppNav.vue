@@ -2,7 +2,7 @@
   <div class="app-nav font-size-sm" @mouseenter="handleMouse()">
     <div class="app-nav-primary">
       <div class="tobias-rei"><span>Tobias Rei</span>, photographer based in Barcelona</div>
-      <div class="font-size-sm-mono underline" :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}"><a class="mr-1" href="mailto:hi@tobiasrei.com">hi@tobiasrei.com</a><a href="https://instagram.com/tobias.rei">@tobias.rei</a></div>
+      <div class="font-size-sm-mono underline nav-links"><a class="mr-1" href="mailto:hi@tobiasrei.com">hi@tobiasrei.com</a><a href="https://instagram.com/tobias.rei">@tobias.rei</a></div>
     </div>
     <div class="app-nav app-nav-show-all">
       <button class="toggle-btn" @click="toggleMasonry()">
@@ -24,6 +24,10 @@ let masTl = gsap.timeline({paused: true})
 let showMasonry = ref(false)
 
 onMounted(() => {
+  gsap.set('.nav-links', {
+    rotation: rotations.value[getRandomInt(5)]
+  })
+
   masTl.set('.photo-masonry', {display: 'block'})
   masTl.set('.masonry-img', {yPercent: 150})
   masTl.set('.masonry-no-child', { yPercent: 110 })

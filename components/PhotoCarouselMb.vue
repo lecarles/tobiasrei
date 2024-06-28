@@ -61,7 +61,6 @@ function setupLoop() {
     draggable: true,
     onChange: (element, index) => { 
       activeIndex.value = index
-      console.log('index', index)
     }
   })
 }
@@ -84,6 +83,7 @@ function setupLoop() {
   z-index: 10000;
 
   &-diary {
+    font-weight: 400;
     font-family: $font-family-mono;
     text-transform: uppercase;
   }
