@@ -1,7 +1,7 @@
 <template>
   <div class="photo-masonry">
       <div class="masonry-grid masonry-grid-work font-size-xs">
-        <button :class="['masonry-grid-item', `work-${i}`]" @mouseenter="handleEnter(`work-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryWork', i)" v-for="(image, i) in props.images" :key="image.filename">
+        <button :class="['masonry-grid-item', `work-${i}`]" @mouseenter="handleEnter(`work-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryWork', getFakeI(i), i)" v-for="(image, i) in work.data.story.content.images" :key="image.filename">
           <div class="masonry-no"><div class="masonry-no-child">({{ i + 1 }})</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
@@ -20,6 +20,9 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import CustomEase from "gsap/CustomEase"
 import { useTobiasStore } from '@/stores/tobiasStore'
+
+const storyblokApi = useStoryblokApi()
+const work = await storyblokApi.get('cdn/stories/work')
 
 const tobiasStore = useTobiasStore()
 
@@ -42,6 +45,11 @@ function handleEnter(id) {
 function handleLeave() {
   gsap.to('.masonry-grid-item', {opacity: 1, duration: 0.4})
 }
+
+function getFakeI(i) {
+  //get index of item in props.images that has same filename as work.data.story.content.images[i].filename
+  return props.images.findIndex(image => image.filename === work.data.story.content.images[i].filename)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +67,7 @@ function handleLeave() {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  column-gap: 6em;
+  column-gap: 1.5em;
   row-gap: 6em;
   justify-content: space-between;
 
@@ -101,7 +109,7 @@ function handleLeave() {
     width: 100%;
     height: 100%;
     max-width: max-content;
-    max-height: 20vh;
+    max-height: 22vh;
   }
 }
 

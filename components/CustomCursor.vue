@@ -1,27 +1,27 @@
 <template>
   <div class="cursor" ref="cursor">
     <div class="stamp stamp-up font-size-sm-mono" v-if="tobiasStore.direction === 'up'">
-      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">
+      <div>
         <span>Diary</span> 
         <span class="mr-1 ml-1">↑</span>
         <span>({{ tobiasStore.currentDiary + 1 > tobiasStore.diaryLength ? 1 : tobiasStore.currentDiary + 1 }}/{{ tobiasStore.diaryLength }})</span>
       </div>
     </div>
     <div class="stamp stamp-down font-size-sm-mono" v-else-if="tobiasStore.direction === 'down'">
-      <div :style="{transform: `rotate(${rotations[getRandomInt(5)]}deg)`}">
+      <div>
         <span>Diary</span> 
         <span class="mr-1 ml-1">↓</span>
         <span>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</span>
       </div>
     </div>
-    <div class="stamp stamp-right" v-else-if="tobiasStore.direction === 'right'">
-      <div>Work</div>
+    <div class="stamp font-size-sm stamp-right" v-else-if="tobiasStore.direction === 'right'">
+      <div class="">Work </div>
       <div>({{ tobiasStore.currentWork + 1 > tobiasStore.workLength ? 1 : tobiasStore.currentWork + 1 }}/{{ tobiasStore.workLength }})</div>   
       <div>→</div>
     </div>
-    <div class="stamp stamp-left" v-else-if="tobiasStore.direction === 'left'">
+    <div class="stamp font-size-sm stamp-left" v-else-if="tobiasStore.direction === 'left'">
       <div>←</div>
-      <div>Work</div>
+      <div class="">Work </div>
       <div>({{ tobiasStore.currentWork - 1 === 0 ? tobiasStore.workLength : tobiasStore.currentWork - 1 }}/{{ tobiasStore.workLength }})</div>
     </div>
     <div class="stamp stamp-nav" v-else-if="tobiasStore.direction === 'nav'">
@@ -92,6 +92,12 @@ onMounted(() => {
     display: flex;
     line-height: 1;
     gap: .2em;
+
+    &-right, &-left {
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      font-size: calc($font-size-md * 0.92);
+    }
 
     &-up, &-down {
       text-align: center;

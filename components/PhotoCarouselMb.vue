@@ -108,7 +108,7 @@ function setupLoop() {
   grid-auto-flow: column;
   position: absolute;
   inset: 0;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 
   .photo-container-mb {

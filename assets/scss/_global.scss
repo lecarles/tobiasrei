@@ -48,24 +48,27 @@ html {
 
 .font-size-sm-mono {
   font-family: $font-family-mono;
-  font-size: calc($font-size-sm * 1.08);
+  font-size: calc($font-size-sm * $font-family-mono-scale);
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: $font-mono-weight;
+  letter-spacing: $font-mono-letter-spacing;
   line-height: 1;
 }
 
 .font-size-xs-mono {
   font-family: $font-family-mono;
-  font-size: calc($font-size-xs * 1.1);
+  font-size: calc($font-size-xs * ($font-family-mono-scale + 0.1));
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: calc($font-mono-weight + 100);
   line-height: 1;
+  letter-spacing: $font-mono-letter-spacing;
 }
 
 .font-family-mono {
   font-family: $font-family-mono;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: $font-mono-weight;
+  letter-spacing: $font-mono-letter-spacing;
 }
 
 a {
@@ -132,26 +135,26 @@ h2 {
    }
 }
 
-.font-size-mdlg {
-  font-family: $font-family-sans;
-  font-size: $font-size-mdlg;
-  font-weight: $font-weight;
-  letter-spacing: -0.02em;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.font-size-md, h3 {
+.font-size-md {
   font-family: $font-family-sans;
   font-size: $font-size-md;
   font-weight: $font-weight;
   letter-spacing: -0.01em;
-  line-height: 1.1;
+  line-height: 1.05;
   margin: 0;
 
   b {
     font-weight: $font-weight;
    }
+}
+
+.font-size-md-mono {
+  font-family: $font-family-mono;
+  font-size: calc($font-size-md * $font-family-mono-scale);
+  text-transform: uppercase;
+  font-weight: $font-mono-weight;
+  line-height: 1;
+  letter-spacing: $font-mono-letter-spacing;
 }
 
 .button {

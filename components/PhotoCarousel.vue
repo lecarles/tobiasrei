@@ -71,7 +71,7 @@ function setupLoop() {
   }
 }
 
-function to(i) {
+function to(i, j) {
   if (shifted.value === true) {
     gsap.set('.photo-carousel-v', {
       y: '100%',
@@ -82,7 +82,7 @@ function to(i) {
     shifted.value = !shifted.value
   }
   loop.toIndex(i, {duration: 0})
-  tobiasStore.currentWork = i + 1
+  tobiasStore.currentWork = j + 1
 }
 
 function toV(i) {
@@ -217,8 +217,8 @@ const props = defineProps({
 <style lang="scss" scoped>
 .carousels {
   position: relative;
-  height: calc(100vh - 1px);
-  width: 100vw;
+  height: calc(100dvh - 1px);
+  width: 100dvw;
   overflow: hidden;
 
   &-wrap {
@@ -233,16 +233,16 @@ button {
 .photo-carousel, .photo-carousel-v {
   position: absolute;
   inset: 0;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 
   .photo-container {
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    padding: 6rem 2rem;
+    padding: 6rem 6vw;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -265,7 +265,7 @@ button {
   display: grid;
   position: fixed;
   inset: 0;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   grid-template-columns: 1fr 1fr 1fr 1fr; 
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 

@@ -1,5 +1,5 @@
 <template>
-  <div class="footer font-size-sm p-md">
+  <div class="footer font-size-md p-md">
     <div class="footer-links">
       afasasd
     </div>

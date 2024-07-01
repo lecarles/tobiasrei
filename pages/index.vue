@@ -48,8 +48,8 @@ function shuffleArray(array) {
   }
 }
 
-function workTo(i) {
-  carouselRef.value.to(i)
+function workTo(i, j) {
+  carouselRef.value.to(i, j)
   navRef.value.toggleMasonry()
 }
 
@@ -61,11 +61,11 @@ function diaryTo(i) {
 </script>
 
 <template>
-  <div class="main-page font-size-sm">
+  <div class="main-page">
     <app-nav ref="navRef"></app-nav>
     <photo-carousel-mb :images="imagesMb" />
     <photo-carousel ref="carouselRef" :images="images" :imagesV="diary.data.story.content.images" />
-    <photo-masonry :images="images" :imagesV="diary.data.story.content.images" @masonry-work="workTo" @masonry-diary="diaryTo" />
+    <photo-masonry :images="work.data.story.content.images" :imagesV="diary.data.story.content.images" @masonry-work="workTo" @masonry-diary="diaryTo" />
   </div>
 </template>
 
