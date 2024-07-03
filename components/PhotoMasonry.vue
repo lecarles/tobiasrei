@@ -1,12 +1,14 @@
 <template>
   <div class="photo-masonry">
       <div class="masonry-grid masonry-grid-work font-size-xs">
+        <div class="masonry-grid-title"><div class="masonry-no-child">Work</div></div>
         <button :class="['masonry-grid-item', `work-${i}`]" @mouseenter="handleEnter(`work-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryWork', getFakeI(i), i)" v-for="(image, i) in work.data.story.content.images" :key="image.filename">
           <div class="masonry-no"><div class="masonry-no-child">({{ i + 1 }})</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
         </button>
       </div>
-      <div class="masonry-grid masonry-grid-diary font-size-xs-mono">
+      <div class="masonry-grid masonry-grid-diary font-size-xs">
+        <div class="masonry-grid-title"><div class="masonry-no-child">Diary</div></div>
         <button :class="['masonry-grid-item', `diary-${i}`]" @mouseenter="handleEnter(`diary-${i}`)" @mouseleave="handleLeave()" @click="$emit('masonryDiary', i)" v-for="(image, i) in props.imagesV" :key="image.filename">
           <div class="masonry-no"><div class="masonry-no-child">({{ i + 1 }})</div></div>
           <div class="masonry-img-wrapper"><img class="masonry-img" :src="image.filename + '/m/400x0'"></div>
@@ -100,6 +102,12 @@ function getFakeI(i) {
     top: -1.5em;
     left: .35em;
     position: absolute;
+    overflow: hidden;
+  }
+
+  &-title {
+    height: 1.2em;
+    transform: translateY(-1.5em);
     overflow: hidden;
   }
 

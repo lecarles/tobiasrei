@@ -51,6 +51,10 @@
   text-align: center;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 /* MARGINS */
 .mt-row {
   margin-top: $row-gap;

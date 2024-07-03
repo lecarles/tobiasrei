@@ -5,7 +5,17 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       meta: [
-        { name: 'title', content: 'Acord per Vilamarxant' }
+        { name: 'title', content: 'Tobias Rei' },
+        { hid: 'og:image', property: 'og:image', content: 'ogimage.png' },
+        { name: "theme-color", content: "#ffffff" },
+        { name: "msapplication-TileColor", content: "#ffffff" },
+      ],
+      link: [
+        { rel: "apple-touch-icon", sizes: "180x180", href:"/apple-touch-icon.png" },
+        { rel: "icon", type: "image/png", sizes: "32x32", href:"/favicon-32x32.png" },
+        { rel: "icon", type: "image/png", sizes: "16x16", href:"/favicon-16x16.png" },
+        { rel: "manifest", href: "/site.webmanifest" },
+        { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#2d2d2d" },
       ],
     }
   },
@@ -18,22 +28,7 @@ export default defineNuxtConfig({
   modules: [
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN },], 
     '@pinia/nuxt',
-    '@nuxtjs/i18n'
   ],
-  i18n: {
-    locales: [
-      {
-        code: 'ca',
-        name: 'Valencià'
-      },
-      {
-        code: 'en',
-        name: 'English'
-      },
-    ],
-    defaultLocale: 'ca',    
-    vueI18n: './i18n.config.ts'
-  },
   vite: {
     css: {
       preprocessorOptions: {

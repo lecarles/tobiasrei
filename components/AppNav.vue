@@ -2,16 +2,20 @@
   <div class="app-nav font-size-md" @mouseenter="handleMouse()">
     <div class="app-nav-primary">
       <div class="tobias-rei"><span>Tobias Rei</span>, photographer based in Barcelona</div>
-      <div class="font-size-md-mono underline nav-links">
+      <!-- <div class="font-size-md-mono underline nav-links">
         <a class="mr-1" href="mailto:hi@tobiasrei.com" target="_blank">hi@tobiasrei.com</a>
         <a href="https://instagram.com/tobias.rei" target="_blank">@tobias.rei</a>
-      </div>
+      </div> -->
     </div>
     <div class="app-nav app-nav-show-all">
       <button class="toggle-btn" @click="toggleMasonry()">
         <div class="toggle-btn-child toggle-btn-all">(Show all)</div>
         <div class="toggle-btn-child toggle-btn-single">(Show single)</div>
       </button>
+    </div>
+    <div class="font-size-md-mono underline nav-links nav-links-btm">
+      <a class="mr-1" href="mailto:hi@tobiasrei.com" target="_blank">hi@tobiasrei.com</a>
+      <a href="https://instagram.com/tobias.rei" target="_blank">@tobias.rei</a>
     </div>
   </div>
 </template>
@@ -83,6 +87,13 @@ defineExpose({
   .tobias-rei {
     max-width: 20ch;
     margin-bottom: .5em;
+  }
+
+  .nav-links-btm {
+    padding: 2.5em;
+    position: fixed;
+    bottom: 0;
+    right: 0;
   }
 
   .toggle-btn {

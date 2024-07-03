@@ -7,7 +7,7 @@ $sm-breakpoint: 950px;
 $md-breakpoint: 950px;
 $xl-breakpoint: 1600px;
 
-$font-size-xs: clamp(.6rem, .75vw, .8rem);
+$font-size-xs: clamp(.65rem, .8vw, .8rem);
 //$font-size-sm: clamp(.85rem, 1vw, 1rem);
 $font-size-sm: clamp(1.1rem, 1.3vw, 1.4rem);
 $font-size-md: clamp(1.1rem, 1.3vw, 1.4rem);
@@ -17,11 +17,11 @@ $font-size-xl: clamp(4rem, 8vw, 25rem);
 
 $line-height-base: 1;
 $font-family-sans: "Saans", sans-serif;
-$font-family-mono: "IBM Plex Mono", monospaced;
-$font-family-mono-scale: .99;
+$font-family-mono: "GT America Mono", monospaced;
+$font-family-mono-scale: .94;
 $font-mono-weight: 400;
 $font-weight: 700;
-$font-mono-letter-spacing: -0.02em;
+$font-mono-letter-spacing: -0.03em;
 
 //latin_modern_mono10_regular
 

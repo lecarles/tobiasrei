@@ -14,12 +14,12 @@
         <span>({{ tobiasStore.currentDiary - 1 === 0 ? tobiasStore.diaryLength : tobiasStore.currentDiary - 1 }}/{{ tobiasStore.diaryLength }})</span>
       </div>
     </div>
-    <div class="stamp font-size-sm stamp-right" v-else-if="tobiasStore.direction === 'right'">
+    <div class="stamp font-size-sm-mono stamp-right" v-else-if="tobiasStore.direction === 'right'">
       <div class="">Work </div>
       <div>({{ tobiasStore.currentWork + 1 > tobiasStore.workLength ? 1 : tobiasStore.currentWork + 1 }}/{{ tobiasStore.workLength }})</div>   
       <div>→</div>
     </div>
-    <div class="stamp font-size-sm stamp-left" v-else-if="tobiasStore.direction === 'left'">
+    <div class="stamp font-size-sm-mono stamp-left" v-else-if="tobiasStore.direction === 'left'">
       <div>←</div>
       <div class="">Work </div>
       <div>({{ tobiasStore.currentWork - 1 === 0 ? tobiasStore.workLength : tobiasStore.currentWork - 1 }}/{{ tobiasStore.workLength }})</div>
