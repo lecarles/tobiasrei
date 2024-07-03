@@ -96,7 +96,6 @@ onMounted(() => {
     &-right, &-left {
       text-transform: uppercase;
       letter-spacing: 0.01em;
-      font-size: calc($font-size-md * 0.92);
     }
 
     &-up, &-down {
