@@ -1,7 +1,7 @@
 <template>
   <div class="app-nav " @mouseenter="handleMouse()">
     <div class="app-nav-primary font-size-sm">
-      <div class="tobias-rei"><span>Tobias Rei</span>, photographer based in Barcelona</div>
+      <div class="tobias-rei"><span>Tobias Rei</span></div>
       <!-- <div class="-mono underline nav-links">
         <a class="mr-1" href="mailto:hi@tobiasrei.com" target="_blank">hi@tobiasrei.com</a>
         <a href="https://instagram.com/tobias.rei" target="_blank">@tobias.rei</a>

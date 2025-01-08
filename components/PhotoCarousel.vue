@@ -240,9 +240,9 @@ button {
     height: 100dvh;
     width: 100vw;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    padding: 6rem 6vw;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 6rem 10vw;
     position: relative;
     align-items: center;
     justify-content: center;

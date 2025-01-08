@@ -2,8 +2,8 @@
 useSeoMeta({
   title: 'Tobias Rei',
   ogTitle: 'Tobias Rei',
-  description: "",
-  ogDescription: "",
+  description: "Photographer based in Barcelona",
+  ogDescription: "Photographer based in Barcelona",
   ogImage: 'https://a.storyblok.com/f/243306/2149x1080/3bba475e90/fons-taronja.png',
 })
 
@@ -22,31 +22,23 @@ const carouselRef = ref(null)
 images.reverse()
 images.unshift(images.pop())
 
-let imgh = images.map((img, i) => {
+let imgh = ref(images.map((img, i) => {
   return {
     filename: img.filename,
     order: i + 1,
     category: "work"
   }
-})
+}))
 
-let imgv = diary.data.story.content.images.map((img, i) => {
+let imgv = ref(diary.data.story.content.images.map((img, i) => {
   return {
     filename: img.filename,
     order: i + 1,
     category: "diary"
   }
-})
+}))
 
-let imagesMb = imgh.concat(imgv)
-shuffleArray(imagesMb)
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+let imagesMb = ref(imgh.value.concat(imgv.value))
 
 function workTo(i, j) {
   carouselRef.value.to(i, j)
@@ -57,7 +49,6 @@ function diaryTo(i) {
   carouselRef.value.toV(i)
   navRef.value.toggleMasonry()
 }
-
 </script>
 
 <template>

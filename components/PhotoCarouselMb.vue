@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-mb">
     <div class="photo-carousel-mb">
-      <div ref="carouselMb" class="photo-container-mb" v-for="photo in props.images" :key="photo.filename">
+      <div ref="carouselMb" class="photo-container-mb" v-for="photo in props.images" :key="photo.category + photo.order">
         <photo-item :image="photo.filename" isMb/>
       </div>
     </div>
