@@ -1,15 +1,15 @@
 <template>
   <div class="carousel-mb">
     <div class="photo-carousel-mb">
-      <div ref="carouselMb" class="photo-container-mb" v-for="photo in props.images" :key="photo.category + photo.order">
-        <photo-item :image="photo.filename" isMb/>
+     <div ref="carouselMb" class="photo-container-mb" v-for="i in order" :key="i">
+        <photo-item :image="props.images[i].filename" isMb/>
       </div>
     </div>
     <div class="pos-container">
       <transition mode="out-in" name="key">
-        <div :key="activeIndex" :class="['font-size-sm-mono position-indicator', `position-indicator-${props.images[activeIndex].category}`]">
+        <div :key="activeIndex" :class="['font-size-sm-mono position-indicator', `position-indicator-${props.images[activeIndex].category}`]" v-if="tobiasStore.workLength">
           {{ cap(props.images[activeIndex].category) }}
-          ({{ props.images[activeIndex].order }} / 24)
+          ({{ props.images[activeIndex].order }} / {{ `${props.images[activeIndex].category === 'diary' ? tobiasStore.diaryLength : tobiasStore.workLength }` }})
         </div>
       </transition>
     </div>
@@ -17,12 +17,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { gsap } from 'gsap'
 import { Draggable } from 'gsap/Draggable'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import CustomEase from "gsap/CustomEase"
 import horizontalLoop from '@/helpers/horizontalLoop'
+import { useTobiasStore } from '@/stores/tobiasStore'
+
+const tobiasStore = useTobiasStore()
 
 const carouselMb = ref(null)
 let loopMb = null
@@ -47,6 +50,14 @@ const props = defineProps({
     type: Object,
     default: null
   },
+  order: {
+    type: Array,
+    default: null
+  },
+  lengths: {
+    type: Object,
+    default: null
+  }
 })
 
 onMounted(() => {
@@ -67,7 +78,7 @@ function setupLoop() {
     paused: true, 
     draggable: true,
     onChange: (element, index) => { 
-      activeIndex.value = index
+      activeIndex.value = props.order[index]
     }
   })
 }

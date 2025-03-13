@@ -4,18 +4,15 @@ useSeoMeta({
   ogTitle: 'Tobias Rei',
   description: "Photographer based in Barcelona",
   ogDescription: "Photographer based in Barcelona",
-  ogImage: 'https://a.storyblok.com/f/243306/2149x1080/3bba475e90/fons-taronja.png',
+  ogImage: '',
 })
 
-import { ref, onMounted } from 'vue'
-import gsap from 'gsap'
+import { ref } from 'vue'
 
 const storyblokApi = useStoryblokApi()
-const route = useRoute()
 const work = await storyblokApi.get('cdn/stories/work')
 const diary = await storyblokApi.get('cdn/stories/diary')
 let images = work.data.story.content.images
-let mobile = ref(false)
 const navRef = ref(null)
 const carouselRef = ref(null)
 
@@ -39,6 +36,7 @@ let imgv = ref(diary.data.story.content.images.map((img, i) => {
 }))
 
 let imagesMb = ref(imgh.value.concat(imgv.value))
+const order = useState('order', () => Array.from({length: imagesMb.value.length - 1}, (_, i) => i + 1).sort(() => Math.random() - 0.5))
 
 function workTo(i, j) {
   carouselRef.value.to(i, j)
@@ -54,7 +52,7 @@ function diaryTo(i) {
 <template>
   <div class="main-page">
     <app-nav ref="navRef"></app-nav>
-    <photo-carousel-mb :images="imagesMb" />
+    <photo-carousel-mb :images="imagesMb" :order="order" />
     <photo-carousel ref="carouselRef" :images="images" :imagesV="diary.data.story.content.images" />
     <photo-masonry :images="work.data.story.content.images" :imagesV="diary.data.story.content.images" @masonry-work="workTo" @masonry-diary="diaryTo" />
   </div>

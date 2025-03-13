@@ -18,7 +18,6 @@
         <button @mouseover="handlemouse('down')" class="down" @click="down()"></button>
         <button @mouseover="handlemouse('right')" class="rr" @click="right()"></button>
         <button @mouseover="handlemouse('left')" class="ll" @click="left()"></button>
-        <!-- <div @mouseenter="handlemouse(`none-${shifted ? 'diary' : 'work'}`)" class="none"></div> -->
       </div>
       <custom-cursor />
     </div>
@@ -34,7 +33,6 @@ import CustomEase from "gsap/CustomEase"
 import horizontalLoop from '@/helpers/horizontalLoop'
 import verticalLoop from '@/helpers/verticalLoop'
 import { useTobiasStore } from '@/stores/tobiasStore'
-import positions from '@/assets/photoPositions.json'
 
 const tobiasStore = useTobiasStore()
 const photos = ref(null)
