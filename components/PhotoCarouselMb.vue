@@ -83,9 +83,10 @@ function cap(value) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
-function clampIndex(value) {
-  const max = Math.max(orderedImages.value.length - 1, 0)
-  return Math.min(Math.max(value, 0), max)
+function wrapIndex(value) {
+  const total = orderedImages.value.length
+  if (!total) return 0
+  return ((value % total) + total) % total
 }
 
 function updateViewportWidth() {
@@ -118,7 +119,7 @@ function onPointerUp() {
     currentIndex.value += dragOffsetX.value < 0 ? 1 : -1
   }
 
-  currentIndex.value = clampIndex(currentIndex.value)
+  currentIndex.value = wrapIndex(currentIndex.value)
   dragOffsetX.value = 0
   isDragging.value = false
 }
