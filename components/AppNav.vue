@@ -149,8 +149,7 @@ defineExpose({
     }
 
     .nav-links-btm {
-      padding: 1.35em;
-      top: 2.75em;
+      top: 0;
       right: 0;
       bottom: unset;
     }
