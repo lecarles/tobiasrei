@@ -13,7 +13,7 @@
         <div class="toggle-btn-child toggle-btn-single">(Show single)</div>
       </button>
     </div>
-    <div class="font-size-sm-mono underline nav-links nav-links-btm">
+    <div class="font-size-sm nav-links nav-links-btm">
       <a class="mr-1" href="mailto:hi@tobiasrei.com" target="_blank">hi@tobiasrei.com</a>
       <a href="https://instagram.com/tobias.rei" target="_blank">@tobias.rei</a>
     </div>
@@ -31,9 +31,9 @@ let masTl = gsap.timeline({paused: true})
 let showMasonry = ref(false)
 
 onMounted(() => {
-  gsap.set('.nav-links', {
+  /* gsap.set('.nav-links', {
     rotation: rotations.value[getRandomInt(5)]
-  })
+  }) */
 
   gsap.to('.app-nav', {
     duration: .65,
@@ -90,7 +90,7 @@ defineExpose({
   }
 
   .nav-links-btm {
-    padding: 2.5em;
+    padding: 1em;
     position: fixed;
     bottom: 0;
     right: 0;
